@@ -6,3 +6,4 @@ export * from "./auth";
 export * from "./wallet";
 export * from "./app";
 export * from "./discovery";
+export * from "./details";
