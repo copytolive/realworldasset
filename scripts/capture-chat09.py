@@ -81,7 +81,7 @@ def verify_flow(page,base):
     if "/checkout" not in page.url: raise RuntimeError(f"Product -> Checkout failed: {page.url}")
     page.get_by_role("button",name="Confirm Purchase",exact=False).click(timeout=4000); page.wait_for_timeout(250)
     if "/account/orders" not in page.url: raise RuntimeError(f"Checkout -> Orders failed: {page.url}")
-    page.get_by_role("button",name="Refund Policy",exact=True).click(timeout=4000); page.wait_for_timeout(250)
+    page.get_by_role("button",name="Refund Policy",exact=False).click(timeout=4000); page.wait_for_timeout(250)
     if "/dispute" not in page.url: raise RuntimeError(f"Orders -> Dispute failed: {page.url}")
     page.get_by_role("button",name="Continue to Review",exact=False).click(timeout=4000); page.wait_for_timeout(180)
     if "Reason" not in page.locator("body").inner_text(): raise RuntimeError("Dispute step did not remain live after Continue")
