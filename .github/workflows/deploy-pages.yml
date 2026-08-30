@@ -29,16 +29,19 @@ jobs:
       - name: Install dependencies
         run: npm install --no-audit --no-fund
 
+      - name: Install visual parity runtime
+        run: |
+          python3 -m pip install --disable-pip-version-check pillow playwright==1.55.0
+          python3 -m playwright install --with-deps chromium
+
+      - name: Extract CHAT 01 assets from Drive references
+        run: python3 scripts/extract-chat01-assets.py
+
       - name: Interaction verification
         run: npm run verify:interactions
 
       - name: Build static export
         run: npm run build
-
-      - name: Install screenshot preview runtime
-        run: |
-          python3 -m pip install --disable-pip-version-check playwright==1.55.0
-          python3 -m playwright install --with-deps chromium
 
       - name: Capture CHAT 01 visual audit
         run: python3 scripts/capture-visuals.py
