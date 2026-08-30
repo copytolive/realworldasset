@@ -12,7 +12,7 @@ SURFACES=[
  ("20-dedicated-alerts-management","/alerts/",None),
  ("21-watchlist-page","/watchlist/",None),
  ("34-reports-page","/reports/",None),
- ("35-export-modal","/reports/","Generate Report"),
+ ("35-export-modal","/reports/","__export__"),
 ]
 
 def prepare():
@@ -28,7 +28,10 @@ def goto(page,base,route):
 
 def open_state(page,label):
     if not label: return
-    page.get_by_role("button",name=label,exact=False).first.click(timeout=4000)
+    if label=="__export__":
+        page.locator(".download-pack .rwa-button").first.click(timeout=4000)
+    else:
+        page.get_by_role("button",name=label,exact=False).first.click(timeout=4000)
     page.wait_for_timeout(120)
 
 def instrument(page):
