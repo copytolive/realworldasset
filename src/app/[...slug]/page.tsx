@@ -1,4 +1,5 @@
 import { RoutePlaceholder } from "@/components/public";
+import { CommerceRoute } from "@/components/commerce";
 
 export const dynamicParams = false;
 
@@ -10,8 +11,8 @@ export function generateStaticParams() {
     "help","help/contact","intelligence","listing-request","markets","merchant","portfolio/holdings",
     "portfolio/orders","portfolio/transactions","portfolio/allocation","press","privacy","pro",
     "risk-disclosure","settings","settings/security","status","terms","rwa/kopi/alerts",
-    "positions/POS-KOPI-001/risk",
-    "rwa/kopi/activity",
+    "positions/POS-KOPI-001/risk","rwa/kopi/activity","checkout","account/orders",
+    "account/orders/RWA-ORD-20240516-9F7A2B/dispute",
     ...[1,2,3].map(i => `intelligence/btc-${i}`),
     ...[1,2,3,4].map(i => `community/thesis/btc-${i}`),
   ];
@@ -21,7 +22,7 @@ export function generateStaticParams() {
     `businesses/${b}/transparency`,`businesses/${b}/about`,`businesses/${b}/store/locations`,
     `businesses/${b}/contact`,`businesses/${b}/token/activity`,`businesses/${b}/token/disclosures`,
     `businesses/${b}/token/tokenomics`,`businesses/${b}/token/utility`,`businesses/${b}/token/vesting`,
-    ...[1,2,3,4,5].map(i => `businesses/${b}/store/products/${i}`),
+    ...[1,2,3,4,5,6,7,8].map(i => `businesses/${b}/store/products/${i}`),
     ...[1,2,3].map(i => `businesses/${b}/updates/${i}`),
   ]);
   const rwaAssets = ["marina-bay-residences","marina-bay-residences-regulated","seaside-private-credit-fund"];
@@ -38,6 +39,7 @@ export function generateStaticParams() {
 
 function titleCase(parts:string[]){return parts.map(part=>part.replace(/-/g," ").replace(/\b\w/g,c=>c.toUpperCase())).join(" / ")}
 export default async function PlaceholderPage({params}:{params:Promise<{slug:string[]}>}){
-  const {slug}=await params;
-  return <RoutePlaceholder title={titleCase(slug)} path={`/${slug.join("/")}`}/>;
+  const {slug}=await params; const path=`/${slug.join("/")}`;
+  if(path==="/checkout"||path==="/account/orders"||path.includes("/account/orders/")&&path.endsWith("/dispute")||path.match(/^\/businesses\/[^/]+\/store(?:\/products\/[^/]+)?$/))return <CommerceRoute path={path}/>;
+  return <RoutePlaceholder title={titleCase(slug)} path={path}/>;
 }
