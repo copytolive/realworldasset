@@ -7,7 +7,10 @@
     "build": "next build",
     "start": "next start",
     "typecheck": "tsc --noEmit",
-    "verify:overlays": "node scripts/verify-overlays.mjs"
+    "verify:foundation": "node scripts/verify-foundation.mjs",
+    "verify:public-auth": "node scripts/verify-public-auth.mjs",
+    "verify:overlays": "node scripts/verify-overlays.mjs",
+    "verify:chat01": "node scripts/verify-overlays.mjs && node scripts/verify-public-auth.mjs"
   },
   "dependencies": {
     "next": "^15.5.0",

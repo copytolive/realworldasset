@@ -3,9 +3,13 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   title: "RWA.MS",
-  description: "Real-world assets, businesses, markets and commerce.",
+  description: "Real-world asset platform",
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
-  return <html lang="en"><body>{children}</body></html>;
+  return (
+    <html lang="en">
+      <body>{children}</body>
+    </html>
+  );
 }
