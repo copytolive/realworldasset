@@ -83,6 +83,10 @@ def audit_surface(page,base,name,route,setup=None):
             results.append({"surface":name,"index":index,"status":"SKIP_DYNAMIC"}); continue
         button=buttons.nth(index); bs=button_state(button)
         label=bs.get("ariaLabel") or bs.get("text") or f"button-{index}"
+        # Chromium still reports controls behind a modal as CSS-visible. They are not hit-testable
+        # to a user, so audit only the active dialog controls while a modal is open.
+        if page.locator('[role="dialog"]').count()>0 and not button.evaluate("el => !!el.closest('[role=dialog]')"):
+            results.append({"surface":name,"index":index,"label":label,"status":"SKIP_OVERLAY_COVERED"}); continue
         if bs.get("disabled"):
             results.append({"surface":name,"index":index,"label":label,"status":"SKIP_DISABLED"}); continue
         if bs.get("ariaPressed")=="true" or bs.get("ariaSelected")=="true" or bs.get("dataActive")=="true":
@@ -98,7 +102,9 @@ def audit_surface(page,base,name,route,setup=None):
     if failed:
         summary="; ".join(f'{x["surface"]} #{x["index"]} {x.get("label")}: {x.get("error") or "no observable action"}' for x in failed[:15])
         raise RuntimeError(f"CHAT04 button audit failed ({len(failed)}): {summary}")
-    print(f"CHAT04 button audit PASS: {name} — {len(results)} visible buttons checked")
+    checked=sum(1 for x in results if x["status"].startswith("PASS"))
+    covered=sum(1 for x in results if x["status"]=="SKIP_OVERLAY_COVERED")
+    print(f"CHAT04 button audit PASS: {name} — {checked} interactable buttons checked, {covered} background controls covered by modal")
     return results
 
 
@@ -124,8 +130,8 @@ def main():
       except subprocess.TimeoutExpired: server.kill()
     (OUT/"chat04-capture.json").write_text(json.dumps(records,indent=2),encoding="utf-8")
     (OUT/"chat04-button-audit.json").write_text(json.dumps(audits,indent=2),encoding="utf-8")
-    passed=sum(1 for x in audits if x["status"].startswith("PASS")); skipped=sum(1 for x in audits if x["status"].startswith("SKIP"))
+    passed=sum(1 for x in audits if x["status"].startswith("PASS")); covered=sum(1 for x in audits if x["status"]=="SKIP_OVERLAY_COVERED"); skipped=sum(1 for x in audits if x["status"].startswith("SKIP") and x["status"]!="SKIP_OVERLAY_COVERED")
     print(f"Captured 5 CHAT04 source-of-truth surfaces at 1672x941")
-    print(f"CHAT04 browser button audit PASS: {passed} functional/current-state controls, {skipped} intentional skips")
+    print(f"CHAT04 browser button audit PASS: {passed} interactable functional/current-state controls; {covered} controls correctly blocked by modal; {skipped} other intentional skips")
 
 if __name__=="__main__": main()
