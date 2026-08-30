@@ -20,7 +20,7 @@ export function AppBrand() {
   return <Link href="/home" className="app-brand" aria-label="RWA.MS authenticated home"><span className="app-brand__mark">◇</span><span>RWA.<b>MS</b></span></Link>;
 }
 
-export function AppShell({ children }: { children: React.ReactNode }) {
+export function AppShell({ children, className = "" }: { children: React.ReactNode; className?: string }) {
   const pathname = usePathname();
   const router = useRouter();
   const [pro, setPro] = React.useState(true);
@@ -44,7 +44,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
     setInteractionStatus(`${label.slice(0, 80)} activated`);
   }
 
-  return <div className={`app-shell ${softTheme ? "soft-theme" : ""}`} onClickCapture={announceButton}>
+  return <div className={`app-shell ${softTheme ? "soft-theme" : ""} ${className}`.trim()} onClickCapture={announceButton}>
     <header className="app-header">
       <AppBrand/>
       <nav className="app-nav" aria-label="Authenticated primary navigation">
