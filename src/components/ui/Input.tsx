@@ -10,8 +10,10 @@ export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> 
 }
 
 export const Input = React.forwardRef<HTMLInputElement, InputProps>(function Input(
-  { className, id, label, hint, error, valid, ...props }, ref,
+  props: InputProps,
+  ref: React.ForwardedRef<HTMLInputElement>,
 ) {
+  const { className, id, label, hint, error, valid, ...inputProps } = props;
   const generatedId = React.useId();
   const fieldId = id ?? generatedId;
   const descriptionId = error || hint ? `${fieldId}-description` : undefined;
@@ -26,7 +28,7 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(function Inp
         data-valid={!error && valid ? "true" : undefined}
         aria-invalid={Boolean(error) || undefined}
         aria-describedby={descriptionId}
-        {...props}
+        {...inputProps}
       />
       {(error || hint) && (
         <span id={descriptionId} className={error ? "rwa-field__error" : "rwa-field__hint"}>
