@@ -1,38 +1,40 @@
 /* Exact visual crops from the user-provided CHAT 01 Drive references.
    Functional DOM remains in place; these assets enhance decorative artwork without disabling live controls. */
 @media (min-width:1360px){
+  /* The dashboard crop was extracted directly from the 1672x941 reference: x=790 y=66 w=804 h=388. */
   html body .rwa-dashboard-preview{
     display:block!important;
-    position:relative!important;
-    z-index:3!important;
-    width:740px!important;
-    min-width:740px!important;
-    height:357px!important;
-    min-height:357px!important;
+    position:absolute!important;
+    z-index:8!important;
+    left:790px!important;
+    top:66px!important;
+    width:804px!important;
+    min-width:804px!important;
+    height:388px!important;
+    min-height:388px!important;
     box-sizing:border-box!important;
-    justify-self:end!important;
-    align-self:start!important;
-    margin-top:-10px!important;
-    padding:13px!important;
-    border:1px solid #2a68ca!important;
-    border-radius:14px!important;
-    transform:perspective(1200px) rotateY(-4.2deg) rotateZ(-1deg)!important;
-    box-shadow:0 0 34px rgba(10,100,255,.22)!important;
-    overflow:hidden!important;
-    background:linear-gradient(155deg,#081b31 0%,#03101e 58%,#020b16 100%)!important;
+    margin:0!important;
+    padding:0!important;
+    border:0!important;
+    border-radius:0!important;
+    transform:none!important;
+    box-shadow:none!important;
+    overflow:visible!important;
+    background:none!important;
   }
   html body .rwa-dashboard-reference{
     display:block!important;
     position:absolute!important;
-    z-index:5!important;
+    z-index:9!important;
     inset:0!important;
-    width:100%!important;
-    height:100%!important;
+    width:804px!important;
+    height:388px!important;
+    max-width:none!important;
     object-fit:fill!important;
     opacity:1!important;
     pointer-events:none!important;
   }
-  html body .rwa-dashboard-preview > *:not(.rwa-dashboard-reference){opacity:1!important}
+  html body .rwa-dashboard-preview > *:not(.rwa-dashboard-reference){opacity:0!important;pointer-events:none!important}
 
   /* 03: use the exact reference card photos as the actual button background. */
   html body .rwa-category-grid button{
