@@ -14,16 +14,17 @@ export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElemen
 }
 
 export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(function Button(
-  { className, variant = "primary", size = "md", loading = false, leadingIcon, trailingIcon, disabled, children, ...props },
-  ref,
+  props: ButtonProps,
+  ref: React.ForwardedRef<HTMLButtonElement>,
 ) {
+  const { className, variant = "primary", size = "md", loading = false, leadingIcon, trailingIcon, disabled, children, ...buttonProps } = props;
   return (
     <button
       ref={ref}
       className={cn("rwa-button", `rwa-button--${variant}`, `rwa-button--${size}`, className)}
       disabled={disabled || loading}
       aria-busy={loading || undefined}
-      {...props}
+      {...buttonProps}
     >
       {loading ? <span className="rwa-button__spinner" aria-hidden="true" /> : leadingIcon}
       <span>{children}</span>

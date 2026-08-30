@@ -2,7 +2,7 @@ name: Deploy RWA.MS to GitHub Pages
 
 on:
   push:
-    branches: ["main", "feat/05-portfolio-funds", "feat/06-account-tools", "feat/07-compliance", "feat/08-rewards"]
+    branches: ["main", "feat/05-portfolio-funds", "feat/06-account-tools", "feat/07-compliance", "feat/08-rewards", "feat/09-commerce"]
   workflow_dispatch:
 
 permissions:
@@ -30,7 +30,10 @@ jobs:
         run: npm install --no-audit --no-fund
 
       - name: Interaction verification
-        run: npm run verify:interactions && npm run verify:chat04 && npm run verify:chat05 && npm run verify:chat06 && npm run verify:chat07 && npm run verify:chat08
+        run: npm run verify:interactions && npm run verify:chat04 && npm run verify:chat05 && npm run verify:chat06 && npm run verify:chat07 && npm run verify:chat08 && npm run verify:chat09
+
+      - name: TypeScript verification
+        run: npm run typecheck
 
       - name: Build static export
         run: npm run build
@@ -57,10 +60,15 @@ jobs:
         run: python3 scripts/capture-chat06.py
 
       - name: Capture CHAT 07 compliance visual and button audit
+        if: github.ref == 'refs/heads/main'
         run: python3 scripts/capture-chat07.py
 
       - name: Capture CHAT 08 rewards visual and button audit
+        if: github.ref == 'refs/heads/main'
         run: python3 scripts/capture-chat08.py
+
+      - name: Capture CHAT 09 commerce visual and button audit
+        run: python3 scripts/capture-chat09.py
 
       - name: Upload visual audit artifact
         if: always()

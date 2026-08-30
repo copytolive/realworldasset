@@ -9,8 +9,10 @@ export interface SelectProps extends React.SelectHTMLAttributes<HTMLSelectElemen
 }
 
 export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(function Select(
-  { className, id, label, hint, error, children, ...props }, ref,
+  props: SelectProps,
+  ref: React.ForwardedRef<HTMLSelectElement>,
 ) {
+  const { className, id, label, hint, error, children, ...selectProps } = props;
   const generatedId = React.useId();
   const fieldId = id ?? generatedId;
   const descriptionId = error || hint ? `${fieldId}-description` : undefined;
@@ -24,7 +26,7 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(function 
         data-invalid={error ? "true" : undefined}
         aria-invalid={Boolean(error) || undefined}
         aria-describedby={descriptionId}
-        {...props}
+        {...selectProps}
       >
         {children}
       </select>
