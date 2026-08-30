@@ -28,3 +28,4 @@ declare namespace React {
   const Fragment: any;
 }
 declare namespace JSX { interface IntrinsicAttributes { key?: any; } }
+declare namespace React { const Suspense: any; }

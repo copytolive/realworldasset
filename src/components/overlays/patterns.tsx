@@ -115,13 +115,13 @@ export function TransactionSuccessModal({ open, onOpenChange, hash = "0x7a3f...9
 }
 
 export interface CartItem { id: string; name: string; symbol: string; quantity: string; total: string; }
-export function CartCheckoutDrawer({ open, onOpenChange, items, subtotal = "$3,690.00", networkFee = "$4.21", slippage = "0.50%", total = "$3,694.21", onRemove, onCheckout, onClear }: ControlledOverlayProps & { items: CartItem[]; subtotal?: string; networkFee?: string; slippage?: string; total?: string; onRemove?: (id: string) => void; onCheckout?: () => void; onClear?: () => void }) {
+export function CartCheckoutDrawer({ open, onOpenChange, items, subtotal = "$3,690.00", networkFee = "$4.21", slippage = "0.50%", total = "$3,694.21", onRemove, onCheckout, onClear, onAddMore }: ControlledOverlayProps & { items: CartItem[]; subtotal?: string; networkFee?: string; slippage?: string; total?: string; onRemove?: (id: string) => void; onCheckout?: () => void; onClear?: () => void; onAddMore?: () => void }) {
   return (
     <Drawer open={open} onOpenChange={onOpenChange} title="Your Cart" description={`${items.length} item${items.length === 1 ? "" : "s"}`} size="xl">
       <div className="rwa-cart-layout">
         <div className="rwa-cart-items">
           {items.map(item => <div className="rwa-cart-item" key={item.id}><div className="rwa-asset-summary__avatar">{item.symbol.slice(0,1)}</div><div className="rwa-cart-item__name"><strong>{item.name}</strong><span>{item.symbol}</span></div><div className="rwa-cart-item__amount"><strong>{item.quantity}</strong><span>{item.total}</span></div><button type="button" aria-label={`Remove ${item.name}`} onClick={() => onRemove?.(item.id)}>×</button></div>)}
-          <button type="button" className="rwa-text-action">＋ Add More Assets</button>
+          <button type="button" className="rwa-text-action" onClick={() => onAddMore ? onAddMore() : onOpenChange(false)}>＋ Add More Assets</button>
         </div>
         <aside className="rwa-order-summary">
           <h3>Order Summary</h3>

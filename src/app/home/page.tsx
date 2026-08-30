@@ -1,2 +1,2 @@
-import { HomePlaceholder } from "@/components/public";
-export default function HomePage(){return <HomePlaceholder/>}
+import { HomeFeed } from "@/components/discovery";
+export default function HomePage(){return <HomeFeed/>}
