@@ -16,4 +16,49 @@
   .data-top-grid{height:218px!important}.data-mid-grid{height:176px!important}.data-bottom-grid{height:232px!important}
   .data-room-side{grid-template-rows:166px 184px 154px 178px!important}.data-room-page .compact-dl{row-gap:2px!important}.data-room-side .compact-dl{row-gap:4px!important}
   .data-table .data-tr{min-height:18px!important}.data-table .data-tr span,.data-table .data-tr button{padding:2px 3px!important}.data-bottom-grid .data-table{font-size:6.2px!important}.data-bottom-grid .detail-panel{padding:6px!important}
+
+  /* CHAT07 final screenshot review: remove the account profile cluster that is absent in Drive 15–18. */
+  body:has(.kyc-layout) .profile-button,
+  body:has(.kyb-layout) .profile-button,
+  body:has(.eligibility-page) .profile-button,
+  body:has(.data-room-page) .profile-button{display:none!important}
+  body:has(.kyc-layout) .app-header-actions,
+  body:has(.kyb-layout) .app-header-actions,
+  body:has(.eligibility-page) .app-header-actions,
+  body:has(.data-room-page) .app-header-actions{gap:7px!important}
+
+  /* 15 — keep the real KYC DOM but tighten it to the Drive desktop density. */
+  .kyc-layout{gap:14px!important;padding:12px 18px 16px!important}
+  .kyc-layout .compliance-rail{padding:16px 14px!important}
+  .kyc-layout .compliance-rail h2{font-size:14px!important;white-space:nowrap!important}
+  .kyc-layout .compliance-rail>p{font-size:11px!important;line-height:1.45!important;margin-bottom:20px!important}
+  .kyc-layout .compliance-stepper button{min-height:68px!important}
+  .kyc-layout .progress-banner{min-height:68px!important;padding:10px 16px!important}
+  .kyc-layout .compliance-card{padding:9px 14px!important}
+  .kyc-layout .compliance-main{gap:9px!important}
+  .kyc-layout .id-types button{height:37px!important}
+  .kyc-layout .upload-pair article{padding:9px!important}
+  .kyc-layout .id-preview{min-height:58px!important}
+  .kyc-layout .requirements-card{padding:12px!important;gap:8px!important}
+  .kyc-layout .selfie-status{padding:8px!important}
+  .kyc-layout .compliance-info{gap:8px!important}
+  .kyc-layout .compliance-info .info-card{padding:11px 13px!important}
+  .kyc-layout .flags{font-size:21px!important}
+  .kyc-layout .ring{width:76px!important;height:76px!important;border-width:10px!important}
+
+  /* 16 — compact KYB to keep the bottom supporting-documents band inside 1672×941. */
+  .kyb-layout{gap:12px!important;padding-bottom:10px!important}
+  .kyb-main{padding:10px 7px!important}
+  .kyb-breadcrumbs{margin-bottom:9px!important}
+  .kyb-heading{margin-bottom:9px!important}
+  .kyb-heading h1{font-size:18px!important}
+  .kyb-card{padding:9px!important;margin-bottom:8px!important}
+  .form-grid{gap:7px!important}
+  .form-grid input,.form-grid select{height:26px!important}
+  .form-grid textarea{height:33px!important}
+  .owners-head,.owner-row{min-height:25px!important}
+  .doc-upload-grid article>button{height:44px!important}
+  .kyb-info{padding-top:11px!important;gap:8px!important}
+  .kyb-info .info-card{padding:11px 13px!important}
+  .verify-step{padding:6px 0!important}
 }
