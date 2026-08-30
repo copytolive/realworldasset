@@ -97,8 +97,12 @@ def audit_surface(page,base,name):
 def verify_flow(page,base):
     goto(page,base,"/businesses/kopi-nusantara/")
     page.get_by_role("button",name="Join Rewards",exact=False).first.click(timeout=4000)
+    page.wait_for_timeout(120)
+    dialog=page.locator('[role="dialog"]')
+    if dialog.count()!=1: raise RuntimeError("Business Profile Join Rewards did not open shared rewards overlay")
+    dialog.get_by_role("button",name="Join Now",exact=True).click(timeout=4000)
     page.wait_for_timeout(180)
-    if "/businesses/kopi-nusantara/rewards" not in page.url: raise RuntimeError(f"Business rewards CTA not routed: {page.url}")
+    if "/businesses/kopi-nusantara/rewards" not in page.url: raise RuntimeError(f"Business rewards overlay handoff not routed: {page.url}")
     page.get_by_role("button",name="Accept Program Terms",exact=False).click(timeout=4000)
     page.get_by_role("button",name="Join Rewards Program",exact=True).click(timeout=4000)
     page.wait_for_timeout(150)
@@ -109,7 +113,7 @@ def verify_flow(page,base):
     page.get_by_role("button",name="Confirm Redemption",exact=True).click(timeout=4000)
     page.wait_for_timeout(150)
     if "Redeemed Successfully" not in page.locator("body").inner_text(): raise RuntimeError("Redeem did not reach success state")
-    print("CHAT08 flow PASS: business profile -> rewards -> joined success; Rewards Center -> shared confirmation -> redeemed success")
+    print("CHAT08 flow PASS: BusinessProfile -> shared JoinRewardsModal -> rewards -> joined success; Rewards Center -> shared confirmation -> redeemed success")
 
 def main():
     prepare(); server=subprocess.Popen(["python3","-m","http.server","4178","--bind","127.0.0.1","--directory",str(PREVIEW)],stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL);time.sleep(1)
