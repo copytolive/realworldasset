@@ -14,7 +14,12 @@ SURFACES={
   "28-commerce-order-success-order-history":"/account/orders/",
   "70-refund-dispute-flow":"/account/orders/RWA-ORD-20240516-9F7A2B/dispute/",
 }
-CURRENT_STATE_LABELS={"25-full-store-page":{"Clear All","Reset"}}
+CURRENT_STATE_LABELS={
+  "25-full-store-page":{"Clear All","Reset"},
+  "26-product-detail":{"−"},
+  "27-checkout":{"−"},
+  "70-refund-dispute-flow":{"➤"},
+}
 
 def prepare():
     if PREVIEW.exists(): shutil.rmtree(PREVIEW)
