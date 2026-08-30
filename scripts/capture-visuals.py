@@ -49,7 +49,12 @@ def capture(page, base_url: str, name: str, route: str) -> dict:
           const assetUrl = '/realworldasset/chat01/landing-dashboard.jpg';
           const asset = await fetch(assetUrl);
           const buf = await asset.arrayBuffer();
-          if (!el) return {missing:true, assetStatus:asset.status, assetBytes:buf.byteLength};
+          const image = new Image();
+          let decodeOk = false;
+          let decodeError = null;
+          image.src = assetUrl;
+          try { await image.decode(); decodeOk = true; } catch (e) { decodeError = String(e); }
+          if (!el) return {missing:true, assetStatus:asset.status, assetBytes:buf.byteLength, decodeOk, decodeError, naturalWidth:image.naturalWidth, naturalHeight:image.naturalHeight};
           const s = getComputedStyle(el);
           const r = el.getBoundingClientRect();
           return {
@@ -57,7 +62,8 @@ def capture(page, base_url: str, name: str, route: str) -> dict:
             width:s.width, height:s.height, backgroundImage:s.backgroundImage,
             rect:{x:r.x,y:r.y,width:r.width,height:r.height},
             max1100:matchMedia('(max-width:1100px)').matches,
-            assetStatus:asset.status, assetType:asset.headers.get('content-type'), assetBytes:buf.byteLength
+            assetStatus:asset.status, assetType:asset.headers.get('content-type'), assetBytes:buf.byteLength,
+            decodeOk, decodeError, naturalWidth:image.naturalWidth, naturalHeight:image.naturalHeight
           };
         }
         """)
