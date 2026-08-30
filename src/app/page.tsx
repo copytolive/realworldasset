@@ -47,6 +47,7 @@ export default function LandingPage(){
           </div>
         </div>
         <Link href="/home" className="rwa-dashboard-preview" aria-label="Open authenticated home preview">
+          <img className="rwa-dashboard-reference" src="/realworldasset/chat01/landing-dashboard.jpg" alt="" aria-hidden="true"/>
           <div className="preview-top"><span className="preview-logo">◈ RWA.MS</span><span className="preview-search">⌕ Search markets, businesses, tokens…</span><span className="preview-utility">♧　☾</span><span className="preview-connect">Connect Wallet</span></div>
           <div className="preview-grid">
             <aside><b>◉ Overview</b><span>▧ Markets</span><span>⌂ Businesses</span><span>◇ RWA</span><span>☆ Watchlist</span><span>▣ Portfolio</span><span>♢ Rewards</span></aside>
