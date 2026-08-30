@@ -23,17 +23,21 @@ def prepare():
 
 def goto(page,base,route):
     r=page.goto(base+route,wait_until="domcontentloaded",timeout=15000)
-    page.wait_for_timeout(140)
+    page.wait_for_timeout(180)
     return r
 
 def open_state(page,label):
     if not label: return
     if label=="__export__":
-        page.locator("main.reports-layout").wait_for(state="attached",timeout=10000)
+        try:
+            page.locator("main.reports-layout").wait_for(state="attached",timeout=6000)
+        except Exception:
+            body=page.locator("body").inner_text(timeout=2000)[:1200]
+            raise RuntimeError(f"Reports surface did not render at {page.url}; body={body!r}")
         opened=page.evaluate("""() => {
           const buttons=Array.from(document.querySelectorAll('button'));
           const button=buttons.find(el => (el.textContent || '').includes('Generate Report'));
-          if (!button) return {ok:false, buttons:buttons.map(x => (x.textContent || '').trim()).filter(Boolean).slice(0,40)};
+          if (!button) return {ok:false, buttons:buttons.map(x => (x.textContent || '').trim()).filter(Boolean).slice(0,60)};
           button.click();
           return {ok:true};
         }""")
@@ -56,7 +60,10 @@ def instrument(page):
     }""")
 
 def capture(page,base,name,route,opener):
-    r=goto(page,base,route); open_state(page,opener)
+    r=goto(page,base,route)
+    if opener:
+        print(f"CHAT06 opener route diagnostic: route={route} status={r.status if r else None} url={page.url} title={page.title()!r}")
+    open_state(page,opener)
     page.screenshot(path=str(OUT/f"{name}.png"),full_page=False)
     return {"name":name,"route":route,"url":page.url,"status":r.status if r else None,"viewport":VIEWPORT,"title":page.title(),"opener":opener}
 
