@@ -45,9 +45,12 @@ def capture(page,base,name,route):
 
 def state(page):
     return page.evaluate("""() => {
-      const s=document.body.innerHTML; let h=2166136261;
+      const clone=document.body.cloneNode(true);
+      clone.querySelectorAll('.app-shell > .sr-only[role="status"]').forEach(x=>x.remove());
+      const s=clone.innerHTML; let h=2166136261;
       for(let i=0;i<s.length;i++){h^=s.charCodeAt(i);h=Math.imul(h,16777619)}
-      return {url:location.href,hash:(h>>>0).toString(16),dialogs:document.querySelectorAll('[role="dialog"]').length,status:Array.from(document.querySelectorAll('[role="status"]')).map(x=>x.textContent||'').join('|'),nav:(window.__rwaNavCalls||[]).slice()}
+      const statuses=Array.from(document.querySelectorAll('[role="status"]')).filter(x=>!x.matches('.app-shell > .sr-only[role="status"]')).map(x=>x.textContent||'').join('|');
+      return {url:location.href,hash:(h>>>0).toString(16),dialogs:document.querySelectorAll('[role="dialog"]').length,status:statuses,nav:(window.__rwaNavCalls||[]).slice()}
     }""")
 
 def meta(button):
