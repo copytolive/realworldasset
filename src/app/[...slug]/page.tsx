@@ -8,7 +8,7 @@ export function generateStaticParams() {
     "community","community/compose","community/thesis/alex-kopi-buy","community/thesis/kopi-bali-update",
     "community/thesis/kopi-long-term-value","community/users/alex-morgan","docs","docs/security",
     "help","help/contact","intelligence","listing-request","markets","merchant","portfolio/holdings",
-    "portfolio/orders","portfolio/transactions","portfolio/allocation","press","privacy","pro","rewards",
+    "portfolio/orders","portfolio/transactions","portfolio/allocation","press","privacy","pro",
     "risk-disclosure","settings","settings/security","status","terms","rwa/kopi/alerts",
     "positions/POS-KOPI-001/risk",
     "rwa/kopi/activity",
@@ -17,7 +17,7 @@ export function generateStaticParams() {
   ];
   const businesses = ["kopi-nusantara","seablue-estate","harbourview-asset-management"];
   const businessRoutes = businesses.flatMap(b => [
-    `businesses/${b}/store`,`businesses/${b}/rewards`,`businesses/${b}/updates`,
+    `businesses/${b}/store`,`businesses/${b}/updates`,
     `businesses/${b}/transparency`,`businesses/${b}/about`,`businesses/${b}/store/locations`,
     `businesses/${b}/contact`,`businesses/${b}/token/activity`,`businesses/${b}/token/disclosures`,
     `businesses/${b}/token/tokenomics`,`businesses/${b}/token/utility`,`businesses/${b}/token/vesting`,
