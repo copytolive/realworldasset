@@ -1,0 +1,15 @@
+:root {
+  color-scheme: dark;
+  --rwa-primary:#0a64ff; --rwa-primary-hover:#2477ff; --rwa-primary-active:#0754da;
+  --rwa-success:#10b981; --rwa-warning:#f59e0b; --rwa-danger:#ef4444; --rwa-info:#3b82f6; --rwa-purple:#a855f7;
+  --rwa-bg:#030812; --rwa-surface:#07111f; --rwa-surface-raised:#0a1424; --rwa-surface-hover:#0d192b;
+  --rwa-border:#18263a; --rwa-border-strong:#243651;
+  --rwa-text:#f7f9fc; --rwa-text-secondary:#9ba8bb; --rwa-text-muted:#6f7d92; --rwa-text-disabled:#465267;
+  --rwa-font-sans:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  --rwa-space-1:.25rem; --rwa-space-2:.5rem; --rwa-space-3:.75rem; --rwa-space-4:1rem; --rwa-space-5:1.25rem; --rwa-space-6:1.5rem; --rwa-space-8:2rem; --rwa-space-10:2.5rem; --rwa-space-12:3rem; --rwa-space-16:4rem;
+  --rwa-radius-sm:.375rem; --rwa-radius-md:.5rem; --rwa-radius-lg:.75rem; --rwa-radius-xl:1rem; --rwa-radius-pill:999px;
+  --rwa-shadow-1:0 1px 2px rgba(0,0,0,.28); --rwa-shadow-2:0 8px 24px rgba(0,0,0,.28); --rwa-shadow-focus:0 0 0 2px rgba(10,100,255,.42);
+  --rwa-container-max:1440px; --rwa-grid-gutter:24px; --rwa-control-h-sm:32px; --rwa-control-h-md:40px; --rwa-control-h-lg:48px;
+  --rwa-duration-fast:120ms; --rwa-duration-base:180ms; --rwa-ease:cubic-bezier(.2,.8,.2,1);
+}
+@media (prefers-reduced-motion:reduce){:root{--rwa-duration-fast:0ms;--rwa-duration-base:0ms}}
