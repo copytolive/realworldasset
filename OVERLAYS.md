@@ -10,8 +10,8 @@ This reference is implemented as a reusable interaction layer, not as a standalo
 - `Drawer` — right or bottom sheet using the same accessible base.
 - `ConfirmationDialog` — reusable confirmation state with pending/loading behavior.
 - `SuccessDialog` — reusable success state.
-- `FormDialog` — reusable form-in-overlay pattern using shared inputs/buttons from CHAT 00A.
-- `OverlayActions` / `OverlayStack` — shared action/content layout helpers.
+- `FormDialog` — reusable form-in-overlay pattern using the shared inputs/buttons from CHAT 00A.
+- `OverlayActions` / `OverlayStack` — shared layout helpers for overlay content and actions.
 
 ## Reusable patterns
 

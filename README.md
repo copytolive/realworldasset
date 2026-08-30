@@ -1,15 +1,19 @@
 # RWA.MS
 
-Public repository for the RWA.MS application.
+Source repository target: `copytolive/realworldasset`.
 
-## Build sequence
+## CHAT 00A — Foundation States Components
 
-The app is built incrementally from the master build guide. `main` is the source of truth; each screenshot batch is implemented on a feature branch and merged only after review.
+This batch implements the reusable foundation extracted from the RWA.MS design-system reference sheets. The screenshots are references, **not application routes**.
 
-## CHAT 00A — Foundation
+### Included
 
-The first batch establishes reusable design tokens, UI primitives and application states from the Empty, Loading/Skeleton, Error, Permission/Policy and Component Library references.
+- Centralized dark-theme design tokens: semantic colors, navy/slate surfaces, typography scale, 4pt spacing, radius, borders, elevation, layout width and motion.
+- UI primitives: Button, Input, Select, Checkbox, Radio, Card, Badge, Tabs, Table, Tooltip, Alert, Toast, Skeleton.
+- Reusable application states: EmptyState, LoadingState, ErrorState and PermissionState.
+- Accessible focus, disabled, validation and reduced-motion conventions.
+- No screenshot-derived page routes were created.
 
-See [`FOUNDATION.md`](./FOUNDATION.md) for the component contract future batches must reuse.
+### Next batch
 
-Target repository: `copytolive/realworldasset`.
+Merge `feat/00a-foundation` into `main` before starting CHAT 00B.

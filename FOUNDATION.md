@@ -1,31 +1,20 @@
-# RWA.MS Foundation — CHAT 00A
+# RWA.MS Foundation Contract
 
-Reference screens: 56 Empty States, 57 Loading/Skeleton States, 58 Error States, 59 Permission/Policy State, and 72 Design System / Component Library.
+## Visual language
+- Dark navy product shell with cool blue primary actions.
+- 12-column layout, max-width 1440px, 24px gutters.
+- 4pt spacing scale.
+- Borders are subtle but visible; surfaces use elevation sparingly.
+- Status semantics are stable across the product: blue=informational/current, green=success/operational, amber=warning/in progress, red=blocking/error, purple=verification/action required.
 
-These screenshots are treated as a reusable design-system reference, not as standalone pages. No route is created for them.
+## Component conventions
+- All interactive controls expose visible focus states.
+- Disabled controls must be non-interactive and visually reduced, not removed.
+- Error messaging is concise, human-readable, and followed by a recovery action where possible.
+- Empty states have one primary action and optionally one secondary text action.
+- Loading states preserve layout dimensions with skeletons to minimize layout shift.
+- Permission states distinguish access mode, reason, what remains available, and a next step.
+- Responsive tables scroll horizontally rather than collapsing critical finance columns.
 
-## Source of truth
-
-- Central tokens: `src/styles/tokens.css`
-- UI primitives: `src/components/ui/`
-- App states: `src/components/states/`
-- Global conventions: `src/app/globals.css`
-
-## Included primitives
-
-Button, Input, Select, Checkbox, Radio, Card, Badge, Tabs, Table, Alert, Toast, Tooltip, and Skeleton.
-
-## Included application states
-
-EmptyState, LoadingState, ErrorState, and PermissionState.
-
-## Conventions
-
-- Dark navy RWA.MS surfaces with centralized semantic colors.
-- 4pt spacing rhythm.
-- Shared radius, border, elevation and control-height tokens.
-- Visible focus state, disabled state and validation states.
-- Reduced-motion support.
-- Responsive table overflow and adaptive state/loading layouts.
-
-Future batches must reuse these primitives and tokens instead of creating duplicate local styles.
+## API stability
+Future batches should import from `@/components` or `@/components/ui` / `@/components/states` instead of creating page-specific duplicates.
