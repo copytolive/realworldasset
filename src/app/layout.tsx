@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import "./pixel-parity.css";
 
 export const metadata: Metadata = {
   title: "RWA.MS",
