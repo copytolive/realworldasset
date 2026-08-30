@@ -1,0 +1,66 @@
+/* Exact visual crops from the user-provided CHAT 01 Drive references.
+   Functional DOM remains in place; these assets replace only decorative artwork. */
+@media (min-width:1360px){
+  /* 01: the reference dashboard is decorative but the whole card remains a live /home link. */
+  html body .rwa-dashboard-preview{
+    width:auto;
+    height:354px;
+    margin-top:-15px;
+    padding:0;
+    border:0;
+    border-radius:0;
+    transform:none;
+    box-shadow:none;
+    background-color:transparent;
+    background-image:url("/realworldasset/chat01/landing-dashboard.jpg");
+    background-repeat:no-repeat;
+    background-position:center;
+    background-size:100% 100%;
+  }
+  html body .rwa-dashboard-preview > *{opacity:0;pointer-events:none}
+
+  /* 03: preserve selectable category buttons/text while using the exact reference photos underneath. */
+  html body .rwa-category-grid button:after{
+    content:"";
+    position:absolute;
+    z-index:1;
+    inset:0;
+    opacity:.88;
+    background-image:url("/realworldasset/chat01/category-sprite.jpg");
+    background-repeat:no-repeat;
+    background-size:400% 200%;
+  }
+  html body .rwa-category-grid button:nth-child(1):after{background-position:0% 0%}
+  html body .rwa-category-grid button:nth-child(2):after{background-position:33.333% 0%}
+  html body .rwa-category-grid button:nth-child(3):after{background-position:66.667% 0%}
+  html body .rwa-category-grid button:nth-child(4):after{background-position:100% 0%}
+  html body .rwa-category-grid button:nth-child(5):after{background-position:0% 100%}
+  html body .rwa-category-grid button:nth-child(6):after{background-position:33.333% 100%}
+  html body .rwa-category-grid button:nth-child(7):after{background-position:66.667% 100%}
+  html body .rwa-category-grid button:nth-child(8):after{background-position:100% 100%}
+  html body .rwa-category-grid button:before{
+    content:"";
+    position:absolute;
+    z-index:2;
+    inset:0;
+    background:linear-gradient(90deg,rgba(2,8,16,.78) 0%,rgba(2,8,16,.44) 52%,rgba(2,8,16,.16) 100%),linear-gradient(0deg,rgba(2,8,16,.70),transparent 58%);
+  }
+  html body .rwa-category-grid button > *{position:relative;z-index:3}
+
+  /* Match the broad two-button footer in the onboarding reference. */
+  html body .rwa-onboarding-footer{
+    display:grid;
+    grid-template-columns:1fr;
+    justify-items:end;
+    align-content:center;
+    gap:5px;
+  }
+  html body .rwa-onboarding-footer__buttons{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    width:540px;
+    gap:12px;
+  }
+  html body .rwa-onboarding-footer__buttons .rwa-button{width:100%}
+  html body .rwa-preference-note{width:540px;text-align:center;color:#64748b;font-size:10px}
+}
