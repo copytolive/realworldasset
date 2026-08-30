@@ -1,0 +1,92 @@
+/* Screenshot-to-code parity pass.
+   These overrides intentionally follow the 1672x941 reference captures: dense chrome,
+   flat dark surfaces, narrow rails, and source-like column proportions. */
+
+/* Business profile: source has a wider utility rail and a denser, search-first chrome. */
+.app-shell--business-profile .detail-page-pad{padding:0 14px 14px;max-width:none}
+.app-shell--business-profile .business-detail-page{grid-template-columns:minmax(0,1fr) 414px;gap:12px}
+.app-shell--business-profile .business-hero{border-radius:8px}
+.app-shell--business-profile .business-hero-cover{height:240px;background:radial-gradient(circle at 70% 42%,rgba(113,92,50,.28),transparent 28%),linear-gradient(90deg,#07131f 4%,rgba(7,19,31,.86) 33%,rgba(17,29,32,.48) 58%,rgba(62,48,29,.62)),linear-gradient(145deg,#13251d,#2d3f29 48%,#6d4a28 76%,#111d17)}
+.app-shell--business-profile .business-hero-content{top:32px;left:28px;right:24px;grid-template-columns:126px minmax(0,1fr) auto}
+.app-shell--business-profile .business-logo{width:112px;height:112px}
+.app-shell--business-profile .business-copy h1{font-size:31px;letter-spacing:-.6px}
+.app-shell--business-profile .business-copy p{font-size:11px;max-width:520px}
+.app-shell--business-profile .business-hero-actions{left:28px;bottom:14px}
+.app-shell--business-profile .business-detail-main>.detail-tabs{min-height:38px}
+.app-shell--business-profile .detail-tabs button{min-width:84px;font-size:10px}
+.app-shell--business-profile .business-detail-main>.detail-metric-strip{margin:8px 0}
+.app-shell--business-profile .detail-metric-strip>div{padding:8px 10px}
+.app-shell--business-profile .business-content-grid{gap:9px;grid-template-columns:1.35fr .9fr}
+.app-shell--business-profile .detail-panel{padding:10px;border-radius:7px}
+.app-shell--business-profile .product-art{height:116px}
+.app-shell--business-profile .business-detail-side{gap:10px}
+.app-shell--business-profile .quick-actions button{padding:8px 0}
+.app-shell--business-profile .verified-card{padding:14px}
+
+/* Community hub source uses a much narrower channels rail than the generic explore shell. */
+.community-shell:not(.profile-shell){grid-template-columns:108px minmax(0,1fr) 292px;gap:5px;padding:0 5px 0 0}
+.community-shell:not(.profile-shell) .community-side{border-radius:0;border-width:0 1px 0 0;padding:9px 6px;gap:2px;background:#04111f}
+.community-shell:not(.profile-shell) .community-side>b{font-size:7px;margin:5px 2px}
+.community-shell:not(.profile-shell) .community-side>button,.community-shell:not(.profile-shell) .community-side>a{font-size:7.5px;padding:6px 5px;border-radius:4px}
+.community-shell:not(.profile-shell) .community-side>button span{width:15px}
+.community-shell:not(.profile-shell) .verified-note{display:none}
+.community-shell:not(.profile-shell) .backline{display:none}
+.community-shell:not(.profile-shell) .community-main{padding-top:5px}
+.community-shell:not(.profile-shell) .community-hero{min-height:106px;border-radius:5px;padding:10px 12px;grid-template-columns:64px minmax(0,1fr) auto;gap:10px}
+.community-shell:not(.profile-shell) .hero-mark{width:58px;height:58px;font-size:9px}
+.community-shell:not(.profile-shell) .community-hero h1{font-size:18px;margin-bottom:3px}
+.community-shell:not(.profile-shell) .community-hero p{font-size:9px;margin-bottom:6px}
+.community-shell:not(.profile-shell) .hero-metrics{font-size:8px;gap:12px}
+.community-shell:not(.profile-shell) .community-hero aside{gap:4px}
+.community-shell:not(.profile-shell) .community-hero .rwa-button{min-height:26px!important;height:26px!important;font-size:8px!important;padding:0 8px!important}
+.community-shell:not(.profile-shell) .community-tabs{margin-top:4px;border-radius:4px}
+.community-shell:not(.profile-shell) .community-tabs button{padding:7px 9px;font-size:8px}
+.community-shell:not(.profile-shell) .compose-inline{margin-top:4px;padding:7px}
+.community-shell:not(.profile-shell) .feed-toolbar{margin:7px 2px 4px}
+.community-shell:not(.profile-shell) .pinned-thread,.community-shell:not(.profile-shell) .thesis-card{padding:9px;border-radius:5px}
+.community-shell:not(.profile-shell) .thesis-title h3{font-size:12px}
+.community-shell:not(.profile-shell) .thesis-title p{font-size:8px}
+.community-shell:not(.profile-shell) .community-right{gap:5px;padding-top:5px}
+.community-shell:not(.profile-shell) .community-right section{padding:8px;border-radius:5px}
+.community-shell:not(.profile-shell) .community-right h3{font-size:9px;margin-bottom:6px}
+.community-shell:not(.profile-shell) .community-right dl,.community-shell:not(.profile-shell) .community-right button{font-size:8px}
+
+/* Merchant OS screenshots have their own compact shell. Suppress the generic authenticated nav
+   and rebuild the source-like top band while keeping every real merchant control underneath. */
+.merchant-app:has(.merchant-layout)>.app-header{display:none}
+.merchant-app:has(.merchant-layout)::before{content:"◇  RWA.MS                                                        ?      ◇ 12      Kopi Ops Team   Admin";height:54px;display:flex;align-items:center;white-space:pre;color:#e9f0f9;font:600 14px/1 var(--rwa-font-sans);letter-spacing:.1px;padding:0 18px;border-bottom:1px solid #15253a;background:#020914;box-sizing:border-box}
+.merchant-app:has(.merchant-layout) .merchant-layout{min-height:calc(100vh - 54px);grid-template-columns:242px minmax(0,1fr);background:#020914}
+.merchant-app:has(.merchant-layout) .merchant-sidebar{top:54px;height:calc(100vh - 54px);padding:10px 10px;background:#04111f;border-right-color:#17283d}
+.merchant-app:has(.merchant-layout) .merchant-business-id{grid-template-columns:42px 1fr auto;padding:4px 3px 12px}
+.merchant-app:has(.merchant-layout) .merchant-business-id>span{width:40px;height:40px}
+.merchant-app:has(.merchant-layout) .merchant-business-id>b{font-size:11px}
+.merchant-app:has(.merchant-layout) .merchant-sidebar h4{font-size:8px;margin:12px 6px 4px}
+.merchant-app:has(.merchant-layout) .merchant-sidebar>button{font-size:10px;padding:7px 8px}
+.merchant-app:has(.merchant-layout) .merchant-content{padding:10px 12px 14px}
+.merchant-app:has(.merchant-layout) .merchant-head{margin-bottom:9px}
+.merchant-app:has(.merchant-layout) .merchant-head h1{font-size:19px;letter-spacing:-.25px}
+.merchant-app:has(.merchant-layout) .merchant-head p{font-size:9px}
+.merchant-app:has(.merchant-layout) .merchant-panel{border-radius:6px;box-shadow:none;background:#04111f;border-color:#172b42;padding:11px}
+.merchant-app:has(.merchant-layout) .merchant-kpis{gap:7px;margin-bottom:7px}
+.merchant-app:has(.merchant-layout) .merchant-kpis .merchant-panel{min-height:78px}
+.merchant-app:has(.merchant-layout) .merchant-kpis strong{font-size:16px}
+.merchant-app:has(.merchant-layout) .merchant-spark{height:18px}
+.merchant-app:has(.merchant-layout) .merchant-dashboard-grid{gap:7px;grid-template-columns:minmax(0,1fr) 305px}
+.merchant-app:has(.merchant-layout) .merchant-dashboard-grid>div,.merchant-app:has(.merchant-layout) .merchant-dashboard-grid>aside{gap:7px}
+.merchant-app:has(.merchant-layout) .merchant-big-chart{height:240px}
+.merchant-app:has(.merchant-layout) .merchant-crm-grid{grid-template-columns:minmax(0,1fr) 306px;gap:7px}
+.merchant-app:has(.merchant-layout) .merchant-analytics-grid{gap:7px}
+.merchant-app:has(.merchant-layout) .merchant-product-table>div,.merchant-app:has(.merchant-layout) .merchant-customer-table>div,.merchant-app:has(.merchant-layout) .merchant-customer-table>button{padding-block:7px}
+
+/* Create Business remains on the authenticated shell, but source uses a denser top band. */
+.app-shell--merchant-create .merchant-create{min-height:calc(100vh - 54px);padding:10px 14px;grid-template-columns:310px minmax(600px,1fr) 390px;gap:14px}
+.app-shell--merchant-create .merchant-create-steps{top:64px}
+.app-shell--merchant-create .merchant-create-side{top:64px}
+.app-shell--merchant-create .merchant-create-main>.merchant-panel{min-height:620px}
+
+@media(max-width:1450px){
+ .app-shell--business-profile .business-detail-page{grid-template-columns:minmax(0,1fr) 360px}
+ .community-shell:not(.profile-shell){grid-template-columns:118px minmax(0,1fr) 270px}
+ .merchant-app:has(.merchant-layout) .merchant-layout{grid-template-columns:220px minmax(0,1fr)}
+ .app-shell--merchant-create .merchant-create{grid-template-columns:260px minmax(560px,1fr) 320px}
+}
