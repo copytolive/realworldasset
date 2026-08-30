@@ -145,15 +145,15 @@ def changed(before: dict, after: dict) -> bool:
 
 
 def audit_route_buttons(page, base_url: str, route_name: str, route: str) -> list[dict]:
-    page.goto(base_url + route, wait_until="domcontentloaded", timeout=30000)
-    wait_ready(page)
+    page.goto(base_url + route, wait_until="domcontentloaded", timeout=10000)
+    page.wait_for_timeout(80)
     initial = page.locator("button:visible")
     count = initial.count()
     results = []
 
     for index in range(count):
-        page.goto(base_url + route, wait_until="domcontentloaded", timeout=30000)
-        wait_ready(page)
+        page.goto(base_url + route, wait_until="domcontentloaded", timeout=10000)
+        page.wait_for_timeout(30)
         buttons = page.locator("button:visible")
         if index >= buttons.count():
             results.append({"route": route, "index": index, "status": "SKIP_DYNAMIC"})
@@ -174,12 +174,8 @@ def audit_route_buttons(page, base_url: str, route_name: str, route: str) -> lis
 
         error = None
         try:
-            button.click(timeout=3000)
-            page.wait_for_timeout(220)
-            try:
-                page.wait_for_load_state("domcontentloaded", timeout=1200)
-            except Exception:
-                pass
+            button.click(timeout=1500, no_wait_after=True)
+            page.wait_for_timeout(120)
         except Exception as exc:
             error = str(exc)
 
