@@ -1,9 +1,10 @@
 const isGitHubPages = process.env.GITHUB_ACTIONS === "true";
 const basePath = isGitHubPages ? "/realworldasset" : "";
 
+/** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-  output: "export" as const,
+  output: "export",
   trailingSlash: true,
   images: { unoptimized: true },
   basePath,
@@ -11,4 +12,4 @@ const nextConfig = {
   typescript: { ignoreBuildErrors: true },
 };
 
-export default nextConfig;
+module.exports = nextConfig;
