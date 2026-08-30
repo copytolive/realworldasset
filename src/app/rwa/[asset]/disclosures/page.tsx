@@ -1,6 +1,7 @@
 import { DisclosuresDataRoom } from "@/components/compliance";
 import { RoutePlaceholder } from "@/components/public";
 import "@/components/compliance/compliance-parity.css";
+import "@/components/compliance/compliance-parity-fixes.css";
 
 export const dynamicParams = false;
 const rwaAssets=["marina-bay-residences","marina-bay-residences-regulated","seaside-private-credit-fund"];
