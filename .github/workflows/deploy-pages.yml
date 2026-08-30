@@ -2,7 +2,7 @@ name: Deploy RWA.MS to GitHub Pages
 
 on:
   push:
-    branches: ["main", "feat/05-portfolio-funds", "feat/06-account-tools", "feat/07-compliance", "feat/08-rewards", "feat/09-commerce", "feat/10-community", "feat/11-settings-support", "feat/12-merchant-core", "feat/13-merchant-growth"]
+    branches: ["main", "feat/05-portfolio-funds", "feat/06-account-tools", "feat/07-compliance", "feat/08-rewards", "feat/09-commerce", "feat/10-community", "feat/11-settings-support", "feat/12-merchant-core", "feat/13-merchant-growth", "fix/screenshot-to-code-parity"]
   workflow_dispatch:
 
 permissions:
@@ -37,34 +37,34 @@ jobs:
           python3 -m pip install --disable-pip-version-check playwright==1.55.0
           python3 -m playwright install --with-deps chromium
       - name: Capture existing visual audit
-        if: github.ref == 'refs/heads/main'
+        if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/fix/screenshot-to-code-parity'
         run: python3 scripts/capture-visuals.py
       - name: Capture CHAT 04 trading visual and button audit
-        if: github.ref == 'refs/heads/main'
+        if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/fix/screenshot-to-code-parity'
         run: python3 scripts/capture-chat04.py
       - name: Capture CHAT 05 account portfolio funds visual and button audit
-        if: github.ref == 'refs/heads/main'
+        if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/fix/screenshot-to-code-parity'
         run: python3 scripts/capture-chat05.py
       - name: Capture CHAT 06 account tools visual and button audit
-        if: github.ref == 'refs/heads/main'
+        if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/fix/screenshot-to-code-parity'
         run: python3 scripts/capture-chat06.py
       - name: Capture CHAT 07 compliance visual and button audit
-        if: github.ref == 'refs/heads/main'
+        if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/fix/screenshot-to-code-parity'
         run: python3 scripts/capture-chat07.py
       - name: Capture CHAT 08 rewards visual and button audit
-        if: github.ref == 'refs/heads/main'
+        if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/fix/screenshot-to-code-parity'
         run: python3 scripts/capture-chat08.py
       - name: Capture CHAT 09 commerce visual and button audit
-        if: github.ref == 'refs/heads/main'
+        if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/fix/screenshot-to-code-parity'
         run: python3 scripts/capture-chat09.py
       - name: Capture CHAT 10 community visual and button audit
-        if: github.ref == 'refs/heads/main'
+        if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/fix/screenshot-to-code-parity'
         run: python3 scripts/capture-chat10.py
       - name: Capture CHAT 11 settings support visual and button audit
-        if: github.ref == 'refs/heads/main'
+        if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/fix/screenshot-to-code-parity'
         run: python3 scripts/capture-chat11.py
       - name: Capture CHAT 12 merchant core visual and button audit
-        if: github.ref == 'refs/heads/main'
+        if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/fix/screenshot-to-code-parity'
         run: python3 scripts/capture-chat12.py
       - name: Capture CHAT 13 merchant growth visual and button audit
         run: python3 scripts/capture-chat13.py
