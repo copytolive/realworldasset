@@ -29,7 +29,17 @@ def goto(page,base,route):
 def open_state(page,label):
     if not label: return
     if label=="__export__":
-        page.locator(".download-pack .rwa-button").first.click(timeout=4000)
+        page.locator("main.reports-layout").wait_for(state="attached",timeout=10000)
+        opened=page.evaluate("""() => {
+          const buttons=Array.from(document.querySelectorAll('button'));
+          const button=buttons.find(el => (el.textContent || '').includes('Generate Report'));
+          if (!button) return {ok:false, buttons:buttons.map(x => (x.textContent || '').trim()).filter(Boolean).slice(0,40)};
+          button.click();
+          return {ok:true};
+        }""")
+        if not opened.get("ok"):
+            raise RuntimeError(f"Generate Report opener not found; visible button labels: {opened.get('buttons')}")
+        page.locator('[role="dialog"]').wait_for(state="visible",timeout=5000)
     else:
         page.get_by_role("button",name=label,exact=False).first.click(timeout=4000)
     page.wait_for_timeout(120)
