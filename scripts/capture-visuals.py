@@ -62,17 +62,18 @@ def main() -> None:
             records.append(capture(page, base_url, "03-onboarding", "/onboarding/"))
             records.append(capture(page, base_url, "05-manage-wallet", "/account/wallet/"))
 
-            response = page.goto(base_url + "/markets/btc-usdc/", wait_until="domcontentloaded", timeout=30000)
+            modal_route = "/businesses/kopi-nusantara/token/"
+            response = page.goto(base_url + modal_route, wait_until="domcontentloaded", timeout=30000)
             wait_ready(page)
             connect = page.get_by_role("button", name="Connect Wallet")
             if connect.count() == 0:
-                raise RuntimeError("Connect Wallet button not found on /markets/btc-usdc/")
+                raise RuntimeError(f"Connect Wallet button not found on {modal_route}")
             connect.first.click()
             page.wait_for_timeout(350)
             page.screenshot(path=str(OUT / "04-connect-wallet-modal.png"), full_page=False)
             records.append({
                 "name": "04-connect-wallet-modal",
-                "route": "/markets/btc-usdc/ + Connect Wallet",
+                "route": modal_route + " + Connect Wallet",
                 "url": page.url,
                 "status": response.status if response else None,
                 "viewport": VIEWPORT,
