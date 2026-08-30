@@ -62,7 +62,7 @@ def main() -> None:
             records.append(capture(page, base_url, "03-onboarding", "/onboarding/"))
             records.append(capture(page, base_url, "05-manage-wallet", "/account/wallet/"))
 
-            modal_route = "/businesses/kopi-nusantara/token/"
+            modal_route = "/markets/btc-usdc/"
             response = page.goto(base_url + modal_route, wait_until="domcontentloaded", timeout=30000)
             wait_ready(page)
             connect = page.get_by_role("button", name="Connect Wallet")
