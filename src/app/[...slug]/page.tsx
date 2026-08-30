@@ -6,12 +6,12 @@ export function generateStaticParams() {
   const fixed = [
     "about","account/activity","account/api","account/billing","api","blog","careers",
     "community","community/compose","community/thesis/alex-kopi-buy","community/thesis/kopi-bali-update",
-    "community/thesis/kopi-long-term-value","community/users/alex-morgan","compliance/kyc","docs","docs/security",
+    "community/thesis/kopi-long-term-value","community/users/alex-morgan","docs","docs/security",
     "help","help/contact","intelligence","listing-request","markets","merchant","portfolio/holdings",
     "portfolio/orders","portfolio/transactions","portfolio/allocation","press","privacy","pro","rewards",
     "risk-disclosure","settings","settings/security","status","terms","rwa/kopi/alerts",
     "positions/POS-KOPI-001/risk",
-    "rwa/kopi/activity","rwa/kopi/disclosures","rwa/btc-usdc/disclosures",
+    "rwa/kopi/activity",
     ...[1,2,3].map(i => `intelligence/btc-${i}`),
     ...[1,2,3,4].map(i => `community/thesis/btc-${i}`),
   ];
@@ -26,7 +26,7 @@ export function generateStaticParams() {
   ]);
   const rwaAssets = ["marina-bay-residences","marina-bay-residences-regulated","seaside-private-credit-fund"];
   const rwaRoutes = rwaAssets.flatMap(a => [
-    ...["activity","disclosures","underlying-asset","underlying","documents","cashflows","legal","valuation","terms"].map(x => `rwa/${a}/${x}`),
+    ...["activity","underlying-asset","underlying","documents","cashflows","legal","valuation","terms"].map(x => `rwa/${a}/${x}`),
     ...[1,2,3,4,5].map(i => `rwa/${a}/documents/${i}`),
   ]);
   const marketRoutes = [
