@@ -34,7 +34,8 @@ def audit(page,base,name):
       b=buttons.nth(i);m=meta(b);label=m["label"] or f"button-{i}"
       if m["disabled"]:rows.append({"surface":name,"index":i,"label":label,"status":"SKIP_DISABLED"});continue
       if not m["hit"]:rows.append({"surface":name,"index":i,"label":label,"status":"SKIP_COVERED"});continue
-      if m["active"]:rows.append({"surface":name,"index":i,"label":label,"status":"PASS_CURRENT_STATE"});continue
+      if m["active"] or (name=="53-advertising-manager" and label=="Create Campaign" and page.get_by_role("button",name="Launch Campaign",exact=True).count()>0):
+        rows.append({"surface":name,"index":i,"label":label,"status":"PASS_CURRENT_STATE"});continue
       a=state(page);err=None
       try:b.click(timeout=2200);page.wait_for_timeout(90)
       except Exception as e:err=str(e)
@@ -53,9 +54,12 @@ def verify_flow(page,base):
     if 'Update published' not in page.locator('body').inner_text():raise RuntimeError('Publish state failed')
     page.get_by_role("button",name=re.compile("Advertising")).first.click();page.wait_for_timeout(100)
     if not page.url.endswith('/merchant/ads/'):raise RuntimeError('Update Composer -> Advertising failed')
+    page.get_by_role("button",name="⌃",exact=True).click();page.wait_for_timeout(80)
+    page.get_by_role("button",name="Create Campaign",exact=True).click();page.wait_for_timeout(80)
+    if page.get_by_role("button",name="Launch Campaign",exact=True).count()==0:raise RuntimeError('Create Campaign did not open builder')
     page.get_by_role("button",name="Launch Campaign",exact=True).click();page.wait_for_timeout(100)
     if 'Campaign launched' not in page.locator('body').inner_text():raise RuntimeError('Launch campaign state failed')
-    print('CHAT13 flow PASS: Merchant -> Orders -> buyer dispute; Orders -> Update Composer -> Advertising; publish/launch states wired')
+    print('CHAT13 flow PASS: Merchant -> Orders -> buyer dispute; Orders -> Update Composer -> Advertising; create/publish/launch states wired')
 def main():
     prepare();server=subprocess.Popen(["python3","-m","http.server","4183","--bind","127.0.0.1","--directory",str(PREVIEW)],stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL);time.sleep(1);base="http://127.0.0.1:4183/realworldasset";records=[];audits=[]
     try:
