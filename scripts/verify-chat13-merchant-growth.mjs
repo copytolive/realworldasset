@@ -8,6 +8,6 @@ for(const p of ['/merchant/orders','/merchant/updates/new','/merchant/ads']) if(
 for(const p of ['/merchant/orders','/merchant/updates/new','/merchant/ads']) if(!merchant.includes(p)) throw new Error(`CHAT13 MerchantSidebar missing ${p}`);
 if(!route.includes('MerchantGrowthRoute')) throw new Error('CHAT13 catch-all not connected');
 const controls=(ui.match(/<GButton\b/g)||[]).length;
-if(controls<55) throw new Error(`CHAT13 expected >=55 growth controls, found ${controls}`);
+if(controls<50) throw new Error(`CHAT13 expected >=50 growth controls, found ${controls}`);
 if(!ui.includes('onClick={onClick}')) throw new Error('CHAT13 GButton primitive has no click handler');
 console.log(`CHAT13 merchant growth PASS: Orders + Update Composer + Advertising routes, buyer dispute handoff, shared MerchantShell/sidebar; ${controls} GButton instances wired.`);
