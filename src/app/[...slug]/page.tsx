@@ -3,6 +3,7 @@ import { CommerceRoute } from "@/components/commerce";
 import { CommunityRoute } from "@/components/community";
 import { SettingsSupportRoute } from "@/components/settings-support";
 import { MerchantRoute } from "@/components/merchant";
+import { MerchantGrowthRoute } from "@/components/merchant-growth";
 
 export const dynamicParams = false;
 
@@ -12,7 +13,7 @@ export function generateStaticParams() {
     "community","community/compose","bookmarks","community/thesis/alex-kopi-buy","community/thesis/kopi-bali-update",
     "community/thesis/kopi-long-term-value","community/thesis/ssea-hidden-gem","community/thesis/marina-prime",
     "community/users/alex-morgan","community/users/alex-yield","docs","docs/security",
-    "help","help/contact","intelligence","listing-request","markets","merchant","merchant/create","merchant/products","merchant/customers","merchant/analytics","portfolio/holdings",
+    "help","help/contact","intelligence","listing-request","markets","merchant","merchant/create","merchant/products","merchant/customers","merchant/analytics","merchant/orders","merchant/updates/new","merchant/ads","portfolio/holdings",
     "portfolio/orders","portfolio/transactions","portfolio/allocation","press","privacy","pro",
     "risk-disclosure","settings","settings/security","status","terms","rwa/kopi/alerts",
     "positions/POS-KOPI-001/risk","rwa/kopi/activity","checkout","account/orders",
@@ -44,6 +45,7 @@ export function generateStaticParams() {
 function titleCase(parts:string[]){return parts.map(part=>part.replace(/-/g," ").replace(/\b\w/g,c=>c.toUpperCase())).join(" / ")}
 export default async function PlaceholderPage({params}:{params:Promise<{slug:string[]}>}){
   const {slug}=await params; const path=`/${slug.join("/")}`;
+  if(["/merchant/orders","/merchant/updates/new","/merchant/ads"].includes(path))return <MerchantGrowthRoute path={path}/>;
   if(path==="/merchant"||["/merchant/create","/merchant/products","/merchant/customers","/merchant/analytics"].includes(path))return <MerchantRoute path={path}/>;
   if(["/settings","/settings/security","/pro","/help","/status"].includes(path))return <SettingsSupportRoute path={path}/>;
   if(path==="/community"||path==="/community/compose"||path==="/bookmarks"||path.startsWith("/community/users/")||path.startsWith("/community/thesis/"))return <CommunityRoute path={path}/>;
