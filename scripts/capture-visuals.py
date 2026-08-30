@@ -32,15 +32,37 @@ def wait_ready(page) -> None:
 def capture(page, base_url: str, name: str, route: str) -> dict:
     response = page.goto(base_url + route, wait_until="domcontentloaded", timeout=30000)
     wait_ready(page)
-    page.screenshot(path=str(OUT / f"{name}.png"), full_page=False)
-    return {
+    record = {
         "name": name,
         "route": route,
         "url": page.url,
         "status": response.status if response else None,
         "viewport": VIEWPORT,
+        "innerWidth": page.evaluate("window.innerWidth"),
+        "innerHeight": page.evaluate("window.innerHeight"),
         "title": page.title(),
     }
+    if name == "01-public-landing":
+        record["landingPreview"] = page.evaluate("""
+        async () => {
+          const el = document.querySelector('.rwa-dashboard-preview');
+          const assetUrl = '/realworldasset/chat01/landing-dashboard.jpg';
+          const asset = await fetch(assetUrl);
+          const buf = await asset.arrayBuffer();
+          if (!el) return {missing:true, assetStatus:asset.status, assetBytes:buf.byteLength};
+          const s = getComputedStyle(el);
+          const r = el.getBoundingClientRect();
+          return {
+            display:s.display, visibility:s.visibility, opacity:s.opacity,
+            width:s.width, height:s.height, backgroundImage:s.backgroundImage,
+            rect:{x:r.x,y:r.y,width:r.width,height:r.height},
+            max1100:matchMedia('(max-width:1100px)').matches,
+            assetStatus:asset.status, assetType:asset.headers.get('content-type'), assetBytes:buf.byteLength
+          };
+        }
+        """)
+    page.screenshot(path=str(OUT / f"{name}.png"), full_page=False)
+    return record
 
 
 def main() -> None:
