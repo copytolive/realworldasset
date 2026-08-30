@@ -16,6 +16,8 @@ const nav = [
   ["Portfolio", "/portfolio"],
 ] as const;
 
+type NavItem = readonly [string, string];
+
 export function AppBrand() {
   return <Link href="/home" className="app-brand" aria-label="RWA.MS authenticated home"><span className="app-brand__mark">◇</span><span>RWA.<b>MS</b></span></Link>;
 }
@@ -39,7 +41,7 @@ export function AppShell({ children, className = "" }: { children: React.ReactNo
   const showPostThesis = !businessProfileHeader && !stateSheetHeader && !designSystemHeader;
   const showProfile = !stateSheetHeader && !designSystemHeader && !merchantCreateHeader;
   const showWallet = !businessProfileHeader;
-  const primaryNav = designSystemHeader ? [] : (businessProfileHeader || stateSheetHeader ? nav.filter(([label]) => label !== "Discover") : nav);
+  const primaryNav: readonly NavItem[] = designSystemHeader ? [] : (businessProfileHeader || stateSheetHeader ? nav.filter(([label]) => label !== "Discover") : nav);
 
   function submitSearch(event: React.FormEvent) {
     event.preventDefault();
