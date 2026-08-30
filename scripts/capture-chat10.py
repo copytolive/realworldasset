@@ -45,12 +45,12 @@ def audit(page,base,name):
     if fail:raise RuntimeError("CHAT10 browser button audit failed: "+"; ".join(f'{x["surface"]} #{x["index"]} {x["label"]}: {x.get("error") or "no observable action"}' for x in fail[:30]))
     print(f"CHAT10 button audit PASS: {name} — {len(rows)} visible buttons checked");return rows
 def verify_flow(page,base):
-    goto(page,base,"/community/");page.get_by_role("button",name="Alex Yield",exact=False).first.click();page.wait_for_timeout(180)
-    if "/community/users/" not in page.url:raise RuntimeError("Community -> profile failed")
-    goto(page,base,"/community/");page.get_by_role("button",name="Why $KOPI Is Brewing",exact=False).first.click();page.wait_for_timeout(180)
-    if "/community/thesis/" not in page.url:raise RuntimeError("Community -> thesis failed")
-    goto(page,base,"/community/");page.get_by_role("button",name="Create Thesis",exact=False).first.click();page.wait_for_timeout(180)
-    if "/community/compose" not in page.url:raise RuntimeError("Community -> composer failed")
+    goto(page,base,"/community/");page.locator("button.author").first.click(timeout=4000);page.wait_for_timeout(180)
+    if "/community/users/" not in page.url:raise RuntimeError(f"Community -> profile failed: {page.url}")
+    goto(page,base,"/community/");page.locator("button.thesis-title").first.click(timeout=4000);page.wait_for_timeout(180)
+    if "/community/thesis/" not in page.url:raise RuntimeError(f"Community -> thesis failed: {page.url}")
+    goto(page,base,"/community/");page.get_by_role("button",name="Create Thesis",exact=False).first.click(timeout=4000);page.wait_for_timeout(180)
+    if "/community/compose" not in page.url:raise RuntimeError(f"Community -> composer failed: {page.url}")
     goto(page,base,"/bookmarks/")
     if "Saved Ideas" not in page.locator("body").inner_text():raise RuntimeError("Bookmarks failed")
     print("CHAT10 flow PASS: Community -> Profile / Thesis / Composer -> Bookmarks")
