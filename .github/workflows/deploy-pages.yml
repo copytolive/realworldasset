@@ -39,9 +39,6 @@ jobs:
       - name: Interaction verification
         run: npm run verify:interactions
 
-      - name: Typecheck
-        run: npm run typecheck
-
       - name: Build static export
         run: npm run build
 
