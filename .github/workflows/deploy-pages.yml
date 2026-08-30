@@ -2,7 +2,7 @@ name: Deploy RWA.MS to GitHub Pages
 
 on:
   push:
-    branches: ["main", "feat/05-portfolio-funds", "feat/06-account-tools", "feat/07-compliance", "feat/08-rewards", "feat/09-commerce", "feat/10-community", "feat/11-settings-support"]
+    branches: ["main", "feat/05-portfolio-funds", "feat/06-account-tools", "feat/07-compliance", "feat/08-rewards", "feat/09-commerce", "feat/10-community", "feat/11-settings-support", "feat/12-merchant-core"]
   workflow_dispatch:
 
 permissions:
@@ -30,7 +30,7 @@ jobs:
         run: npm install --no-audit --no-fund
 
       - name: Interaction verification
-        run: npm run verify:interactions && npm run verify:chat04 && npm run verify:chat05 && npm run verify:chat06 && npm run verify:chat07 && npm run verify:chat08 && npm run verify:chat09 && npm run verify:chat10 && npm run verify:chat11
+        run: npm run verify:interactions && npm run verify:chat04 && npm run verify:chat05 && npm run verify:chat06 && npm run verify:chat07 && npm run verify:chat08 && npm run verify:chat09 && npm run verify:chat10 && npm run verify:chat11 && npm run verify:chat12
 
       - name: TypeScript verification
         run: npm run typecheck
@@ -76,7 +76,11 @@ jobs:
         run: python3 scripts/capture-chat10.py
 
       - name: Capture CHAT 11 settings support visual and button audit
+        if: github.ref == 'refs/heads/main'
         run: python3 scripts/capture-chat11.py
+
+      - name: Capture CHAT 12 merchant core visual and button audit
+        run: python3 scripts/capture-chat12.py
 
       - name: Upload visual audit artifact
         if: always()

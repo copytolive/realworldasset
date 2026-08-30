@@ -20,6 +20,7 @@
     "verify:chat09": "node scripts/verify-chat09-commerce.mjs && node scripts/verify-interaction-contract.mjs && node scripts/verify-all-interactions.mjs",
     "verify:chat10": "node scripts/verify-chat10-community.mjs && node scripts/verify-interaction-contract.mjs && node scripts/verify-all-interactions.mjs",
     "verify:chat11": "node scripts/verify-chat11-settings-support.mjs && node scripts/verify-interaction-contract.mjs && node scripts/verify-all-interactions.mjs",
+    "verify:chat12": "node scripts/verify-chat12-merchant-core.mjs && node scripts/verify-interaction-contract.mjs && node scripts/verify-all-interactions.mjs",
     "verify:interactions": "node scripts/verify-interaction-contract.mjs && node scripts/verify-all-interactions.mjs"
   },
   "dependencies": {
