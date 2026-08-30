@@ -57,9 +57,11 @@ jobs:
         run: python3 scripts/capture-chat06.py
 
       - name: Capture CHAT 07 compliance visual and button audit
+        if: github.ref == 'refs/heads/main'
         run: python3 scripts/capture-chat07.py
 
       - name: Capture CHAT 08 rewards visual and button audit
+        if: github.ref == 'refs/heads/main'
         run: python3 scripts/capture-chat08.py
 
       - name: Capture CHAT 09 commerce visual and button audit
