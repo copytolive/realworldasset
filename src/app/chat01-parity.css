@@ -1,0 +1,68 @@
+/* CHAT 01 desktop parity overrides.
+   Reference viewport: 1672x941. These selectors intentionally stay scoped
+   to the five public/auth/onboarding/wallet surfaces from the CHAT 01 Drive set. */
+@media (min-width: 1200px) {
+  /* 01 — Public landing */
+  .rwa-landing{max-width:none;margin:0;padding:24px 72px 0}
+  .rwa-hero{grid-template-columns:690px minmax(0,1fr);gap:30px;align-items:start;min-height:352px}
+  .rwa-hero__copy{padding-top:7px}
+  .rwa-hero__copy h1{font-size:62px;line-height:.98;letter-spacing:-.035em;margin:0 0 12px;white-space:nowrap}
+  .rwa-hero__copy>p{font-size:16px;line-height:1.48;max-width:600px;margin:0}
+  .rwa-hero__actions{gap:12px;margin:17px 0 0}
+  .rwa-hero__actions .rwa-link-button{height:38px;padding-inline:16px;font-size:13px}
+  .rwa-stats{gap:12px;margin-top:16px;max-width:620px}
+  .rwa-stats b{font-size:19px}.rwa-stats span{font-size:10px}
+  .rwa-dashboard-preview{height:370px;min-height:0;margin-top:-17px;padding:14px;transform:perspective(1000px) rotateY(-3deg);border-radius:13px}
+  .preview-grid{margin-top:13px}.preview-grid aside{gap:10px;padding:12px 8px}.preview-grid section{padding:10px 12px}
+  .preview-kpis i{padding:9px}.preview-chart{height:145px;margin-top:9px;padding:14px}
+  .rwa-featured{margin-top:0}.rwa-section-title h2,.rwa-everything h2{font-size:14px;margin-bottom:7px}
+  .rwa-featured-grid{gap:10px}.rwa-market-card{height:102px;padding:9px 11px;border-radius:8px}
+  .rwa-market-avatar{width:32px;height:32px}.rwa-market-card p{font-size:11px}.rwa-market-card small{font-size:9px}.rwa-market-card em{font-size:8px}
+  .rwa-market-card dl{margin-top:7px}.rwa-market-card dt{font-size:8px}.rwa-market-card dd{font-size:10px;margin-top:1px}
+  .rwa-everything{margin-top:10px}.rwa-feature-grid{gap:9px}.rwa-feature-grid>a{height:94px;padding:10px;border-radius:8px}
+  .rwa-feature-grid>a>span{width:35px;height:35px}.rwa-feature-grid b{font-size:11px}.rwa-feature-grid p{font-size:9px;line-height:1.35;margin-top:3px}
+  .rwa-trust{margin:8px 0 0;padding:12px 0;gap:16px;font-size:15px}.rwa-trust b{font-size:11px}
+  .rwa-footer{height:142px;padding:17px 72px;gap:28px}.rwa-footer>div{gap:5px}.rwa-footer b{font-size:11px}.rwa-footer p,.rwa-footer a{font-size:9px;line-height:1.45}.rwa-footer-brand{font-size:16px!important}.rwa-socials a{width:29px;height:29px}
+
+  /* 02 — Login / sign-up */
+  .rwa-auth-page{height:941px;min-height:941px;padding:18px 28px 20px;position:relative;overflow:hidden;background:#030812}
+  .rwa-auth-page::before{content:"";position:absolute;inset:43% -12% -18% -12%;pointer-events:none;opacity:.9;background:radial-gradient(ellipse at 50% 88%,rgba(0,104,255,.86) 0 1.5%,rgba(0,83,255,.30) 10%,transparent 43%),repeating-linear-gradient(86deg,transparent 0 53px,rgba(18,102,255,.15) 54px 55px),repeating-linear-gradient(4deg,transparent 0 38px,rgba(18,102,255,.14) 39px 40px);transform:perspective(550px) rotateX(63deg) scale(1.55);transform-origin:center bottom;filter:drop-shadow(0 -8px 14px rgba(0,99,255,.45))}
+  .rwa-auth-top,.rwa-auth-panel,.rwa-auth-footer{position:relative;z-index:1}
+  .rwa-auth-top{max-width:1600px;margin:0 auto 20px}
+  .rwa-auth-panel{max-width:1132px;height:744px;margin:0 auto;border-radius:16px;padding:18px;grid-template-columns:565px 1fr;grid-template-rows:584px 116px;gap:18px 34px}
+  .rwa-auth-main,.rwa-auth-wallet{height:584px;border-radius:12px;padding:16px 34px}
+  .rwa-auth-tabs{margin-bottom:15px}.rwa-auth-tabs a{padding:7px}
+  .rwa-auth-heading{margin-bottom:12px}.rwa-auth-heading h1{font-size:21px;margin-bottom:3px}.rwa-auth-heading p,.rwa-auth-wallet>p{font-size:12px}
+  .rwa-auth-form{gap:8px}.rwa-eye{top:34px}.rwa-auth-text-action{font-size:11px}
+  .rwa-auth-divider{margin:10px 0}.rwa-auth-social{gap:5px}.rwa-auth-social .rwa-button{min-height:32px;height:32px;font-size:11px}
+  .rwa-auth-switch{font-size:11px;margin:8px 0}.rwa-auth-notice{margin-top:7px;padding:7px 10px;font-size:11px}
+  .rwa-auth-wallet{padding-top:25px}.rwa-auth-wallet__icon{font-size:29px}.rwa-auth-wallet h2{font-size:18px;margin:8px 0 3px}
+  .rwa-wallet-auth-list{gap:6px;margin:18px 0 12px}.rwa-wallet-auth-list button{height:44px;border-radius:8px;padding-inline:13px}.wallet-mark{width:26px;height:26px}
+  .rwa-auth-custody{padding:10px;border-radius:8px}.rwa-auth-custody>span{font-size:23px}.rwa-auth-custody p{font-size:10px;line-height:1.35}.rwa-auth-custody strong{font-size:11px}
+  .rwa-auth-benefits{height:116px;padding:12px 16px;gap:10px}.rwa-auth-benefits>div{gap:8px;padding-right:9px}.rwa-auth-benefits>div>span{width:36px;height:36px}.rwa-auth-benefits p{font-size:9px;line-height:1.35}.rwa-auth-benefits strong{font-size:10px;margin-bottom:2px}
+  .rwa-auth-footer{max-width:1132px;margin:14px auto 0;font-size:10px}
+
+  /* 03 — First-time onboarding */
+  .rwa-onboarding-shell{max-width:none;margin:0 14px;grid-template-columns:391px minmax(0,1fr);min-height:calc(100vh - 65px);border-radius:12px}
+  .rwa-onboarding-side{padding:79px 33px 24px}.rwa-onboarding-side h2{font-size:25px}.rwa-onboarding-side>p{font-size:13px}.rwa-onboarding-side hr{margin:25px 0}
+  .rwa-onboarding-benefit{grid-template-columns:54px 1fr;margin:18px 0}.rwa-onboarding-benefit p{font-size:12px}.rwa-onboarding-benefit b{font-size:13px}
+  .rwa-mini-chart{margin-top:54px}
+  .rwa-stepper{height:66px;padding:0 90px}.rwa-step-content{padding:21px 17px 8px}
+  .rwa-step-content>h1{font-size:31px}.rwa-step-content>p{font-size:13px;margin-bottom:15px}
+  .rwa-category-grid{gap:13px}.rwa-category-grid button{min-height:175px;padding:17px}.rwa-category-grid b{font-size:16px;margin:16px 0 4px}.rwa-category-grid small{font-size:11px;line-height:1.38}
+  .rwa-selection-count{margin:7px 6px 12px}.rwa-step-content h3{font-size:15px;margin:9px 0}
+  .rwa-follow-grid{gap:12px}.rwa-follow-grid>div{height:104px;padding:10px 12px;grid-template-columns:54px 1fr auto}.rwa-view-more{margin:8px auto}
+  .rwa-onboarding-footer{padding:12px 20px}
+
+  /* 04 — Connect Wallet dialog */
+  .rwa-connect-wallet-grid{grid-template-columns:300px 1fr}.rwa-connect-wallet-list{padding:14px 17px}.rwa-connect-wallet-list .rwa-option-row{min-height:45px;margin-bottom:7px}
+  .rwa-connect-wallet-detail{padding:22px 24px;gap:14px}.rwa-wallet-hero>span{width:58px;height:58px}.rwa-wallet-hero h3{font-size:21px}
+  .rwa-wallet-benefits{gap:10px;padding-bottom:13px}.rwa-wallet-preview{padding:10px}
+
+  /* 05 — Manage Wallet */
+  .rwa-wallet-layout{max-width:none;margin:0;grid-template-columns:270px minmax(0,1fr)}
+  .rwa-settings-nav{margin:14px 10px 14px 12px;padding:10px}.rwa-settings-nav h3{margin:4px 9px 12px}.rwa-settings-nav>button{padding:8px}.rwa-custody-note{padding:11px}.rwa-custody-note p{margin:0;font-size:10px}.rwa-system-status{margin-top:10px;padding:9px}
+  .rwa-wallet-content{padding:18px 28px 18px}.rwa-wallet-title h1{font-size:27px}.rwa-wallet-title p,.rwa-section-description{font-size:11px;margin:3px 0 10px}.rwa-wallet-content h2{font-size:14px;margin:12px 0 7px}
+  .rwa-wallet-card{min-height:64px;padding:9px 14px;grid-template-columns:48px minmax(180px,1.3fr) 1fr 1fr 1fr auto;gap:11px}.rwa-wallet-logo{width:38px;height:38px}.rwa-wallet-list .rwa-wallet-card{min-height:60px}
+  .rwa-session-row{min-height:43px;padding:0 14px}.rwa-session-row.header{min-height:29px}.rwa-security-banner{padding:10px 13px;margin-top:10px}
+}
