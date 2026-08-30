@@ -2,7 +2,7 @@ name: Deploy RWA.MS to GitHub Pages
 
 on:
   push:
-    branches: ["main", "feat/05-portfolio-funds"]
+    branches: ["main", "feat/05-portfolio-funds", "feat/06-account-tools"]
   workflow_dispatch:
 
 permissions:
@@ -30,7 +30,7 @@ jobs:
         run: npm install --no-audit --no-fund
 
       - name: Interaction verification
-        run: npm run verify:interactions && npm run verify:chat04 && npm run verify:chat05
+        run: npm run verify:interactions && npm run verify:chat04 && npm run verify:chat05 && npm run verify:chat06
 
       - name: Build static export
         run: npm run build
@@ -41,15 +41,22 @@ jobs:
           python3 -m playwright install --with-deps chromium
 
       - name: Capture existing visual audit
+        if: github.ref == 'refs/heads/main'
         run: python3 scripts/capture-visuals.py
 
       - name: Capture CHAT 04 trading visual and button audit
+        if: github.ref == 'refs/heads/main'
         run: python3 scripts/capture-chat04.py
 
       - name: Capture CHAT 05 account portfolio funds visual and button audit
+        if: github.ref == 'refs/heads/main'
         run: python3 scripts/capture-chat05.py
 
+      - name: Capture CHAT 06 account tools visual and button audit
+        run: python3 scripts/capture-chat06.py
+
       - name: Upload visual audit artifact
+        if: always()
         uses: actions/upload-artifact@v4
         with:
           name: visual-audit-rwa
@@ -57,9 +64,11 @@ jobs:
           retention-days: 2
 
       - name: Disable Jekyll processing
+        if: success()
         run: touch out/.nojekyll
 
       - name: Upload Pages artifact
+        if: success()
         uses: actions/upload-pages-artifact@v3
         with:
           path: ./out
