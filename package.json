@@ -12,6 +12,7 @@
     "verify:overlays": "node scripts/verify-overlays.mjs",
     "verify:chat01": "node scripts/verify-overlays.mjs && node scripts/verify-public-auth.mjs",
     "verify:chat03": "node scripts/verify-chat03-details.mjs && node scripts/verify-interaction-contract.mjs && node scripts/verify-all-interactions.mjs",
+    "verify:chat04": "node scripts/verify-chat04-trading.mjs && node scripts/verify-interaction-contract.mjs && node scripts/verify-all-interactions.mjs",
     "verify:interactions": "node scripts/verify-interaction-contract.mjs && node scripts/verify-all-interactions.mjs"
   },
   "dependencies": {
