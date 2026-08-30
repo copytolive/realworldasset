@@ -1,5 +1,6 @@
 import { EligibilityGuard } from "@/components/compliance";
 import { EligibilityParityChrome } from "@/components/compliance/ComplianceParity";
+import "@/components/compliance/compliance-parity-fixes.css";
 
 export const dynamicParams = false;
 
