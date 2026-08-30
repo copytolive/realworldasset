@@ -3,21 +3,27 @@
 @media (min-width:1360px){
   /* 01: the reference dashboard is decorative but the whole card remains a live /home link. */
   html body .rwa-dashboard-preview{
-    width:auto;
-    height:354px;
-    margin-top:-15px;
-    padding:0;
-    border:0;
-    border-radius:0;
-    transform:none;
-    box-shadow:none;
-    background-color:transparent;
-    background-image:url("/realworldasset/chat01/landing-dashboard.jpg");
-    background-repeat:no-repeat;
-    background-position:center;
-    background-size:100% 100%;
+    display:block!important;
+    width:740px!important;
+    min-width:740px!important;
+    height:357px!important;
+    min-height:357px!important;
+    justify-self:end!important;
+    align-self:start!important;
+    margin-top:-10px!important;
+    padding:0!important;
+    border:0!important;
+    border-radius:0!important;
+    transform:none!important;
+    box-shadow:none!important;
+    overflow:visible!important;
+    background-color:transparent!important;
+    background-image:url("/realworldasset/chat01/landing-dashboard.jpg")!important;
+    background-repeat:no-repeat!important;
+    background-position:center center!important;
+    background-size:740px 357px!important;
   }
-  html body .rwa-dashboard-preview > *{opacity:0;pointer-events:none}
+  html body .rwa-dashboard-preview > *{opacity:0!important;pointer-events:none!important}
 
   /* 03: preserve selectable category buttons/text while using the exact reference photos underneath. */
   html body .rwa-category-grid button:after{
