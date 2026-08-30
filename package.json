@@ -18,6 +18,7 @@
     "verify:chat07": "node scripts/verify-chat07-compliance.mjs && node scripts/verify-interaction-contract.mjs && node scripts/verify-all-interactions.mjs",
     "verify:chat08": "node scripts/verify-chat08-rewards.mjs && node scripts/verify-interaction-contract.mjs && node scripts/verify-all-interactions.mjs",
     "verify:chat09": "node scripts/verify-chat09-commerce.mjs && node scripts/verify-interaction-contract.mjs && node scripts/verify-all-interactions.mjs",
+    "verify:chat10": "node scripts/verify-chat10-community.mjs && node scripts/verify-interaction-contract.mjs && node scripts/verify-all-interactions.mjs",
     "verify:interactions": "node scripts/verify-interaction-contract.mjs && node scripts/verify-all-interactions.mjs"
   },
   "dependencies": {
