@@ -1,4 +1,5 @@
 import { EligibilityGuard } from "@/components/compliance";
+import { EligibilityParityChrome } from "@/components/compliance/ComplianceParity";
 
 export const dynamicParams = false;
 
@@ -8,5 +9,8 @@ export function generateStaticParams(){
 
 export default async function RestrictedRwaPage({params}:{params:Promise<{asset:string}>}){
   const {asset}=await params;
-  return <EligibilityGuard assetSlug={asset}/>;
+  return <>
+    <EligibilityParityChrome assetSlug={asset}/>
+    <EligibilityGuard assetSlug={asset}/>
+  </>;
 }
