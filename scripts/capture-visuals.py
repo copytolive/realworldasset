@@ -174,7 +174,7 @@ def audit_route_buttons(page, base_url: str, route_name: str, route: str) -> lis
 
         error = None
         try:
-            button.click(timeout=1500, no_wait_after=True)
+            button.evaluate("el => el.click()")
             page.wait_for_timeout(120)
         except Exception as exc:
             error = str(exc)
