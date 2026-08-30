@@ -1,6 +1,7 @@
 import { RoutePlaceholder } from "@/components/public";
 import { CommerceRoute } from "@/components/commerce";
 import { CommunityRoute } from "@/components/community";
+import { SettingsSupportRoute } from "@/components/settings-support";
 
 export const dynamicParams = false;
 
@@ -42,6 +43,7 @@ export function generateStaticParams() {
 function titleCase(parts:string[]){return parts.map(part=>part.replace(/-/g," ").replace(/\b\w/g,c=>c.toUpperCase())).join(" / ")}
 export default async function PlaceholderPage({params}:{params:Promise<{slug:string[]}>}){
   const {slug}=await params; const path=`/${slug.join("/")}`;
+  if(["/settings","/settings/security","/pro","/help","/status"].includes(path))return <SettingsSupportRoute path={path}/>;
   if(path==="/community"||path==="/community/compose"||path==="/bookmarks"||path.startsWith("/community/users/")||path.startsWith("/community/thesis/"))return <CommunityRoute path={path}/>;
   if(path==="/checkout"||path==="/account/orders"||path.includes("/account/orders/")&&path.endsWith("/dispute")||path.match(/^\/businesses\/[^/]+\/store(?:\/products\/[^/]+)?$/))return <CommerceRoute path={path}/>;
   return <RoutePlaceholder title={titleCase(slug)} path={path}/>;

@@ -54,7 +54,7 @@ export function AppShell({ children, className = "" }: { children: React.ReactNo
         <input aria-label="Search RWA.MS" value={query} onChange={e => setQuery(e.target.value)} placeholder="Search" />
       </form>
       <div className="app-header-actions">
-        <div className="mode-toggle" aria-label="Interface mode"><button type="button" aria-pressed={!pro} onClick={() => setPro(false)}>Simple</button><button type="button" aria-pressed={pro} onClick={() => setPro(true)}>PRO</button></div>
+        <div className="mode-toggle" aria-label="Interface mode"><button type="button" aria-pressed={!pro} onClick={() => setPro(false)}>Simple</button><button type="button" aria-pressed={pro} onClick={() => { setPro(true); router.push("/pro"); }}>PRO</button></div>
         <Button size="sm" onClick={() => router.push("/community/compose")}>＋ Post Thesis</Button>
         <button className="icon-button" type="button" aria-label="Notifications" onClick={() => router.push("/notifications")}>♢<span>3</span></button>
         <button className="icon-button" type="button" aria-label="Toggle theme" onClick={() => setSoftTheme(v => !v)}>{softTheme ? "☀" : "☾"}</button>
