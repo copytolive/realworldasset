@@ -45,7 +45,7 @@ def audit(page,base,name):
 def verify_flow(page,base):
     goto(page,base,"/merchant/create/");page.get_by_role("button",name=re.compile("Review & Submit")).click();page.wait_for_timeout(100);page.get_by_role("button",name="Create Business",exact=True).click();page.wait_for_timeout(120)
     if not page.url.endswith('/merchant/'):raise RuntimeError('Create Business -> Merchant failed')
-    page.get_by_role("button",name="＋ Add Product",exact=True).click();page.wait_for_timeout(100)
+    page.get_by_role("button",name="＋ Add Product",exact=True).first.click();page.wait_for_timeout(100)
     if not page.url.endswith('/merchant/products/'):raise RuntimeError('Merchant -> Products failed')
     goto(page,base,"/merchant/");page.get_by_role("button",name="Customers",exact=True).click();page.wait_for_timeout(100)
     if not page.url.endswith('/merchant/customers/'):raise RuntimeError('Merchant -> Customers failed')
