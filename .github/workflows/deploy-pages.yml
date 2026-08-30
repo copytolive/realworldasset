@@ -32,6 +32,9 @@ jobs:
       - name: Interaction verification
         run: npm run verify:interactions && npm run verify:chat04 && npm run verify:chat05 && npm run verify:chat06 && npm run verify:chat07 && npm run verify:chat08 && npm run verify:chat09
 
+      - name: TypeScript verification
+        run: npm run typecheck
+
       - name: Build static export
         run: npm run build
 
