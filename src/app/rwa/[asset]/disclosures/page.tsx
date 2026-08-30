@@ -1,12 +1,15 @@
 import { DisclosuresDataRoom } from "@/components/compliance";
+import { RoutePlaceholder } from "@/components/public";
 
 export const dynamicParams = false;
+const rwaAssets=["marina-bay-residences","marina-bay-residences-regulated","seaside-private-credit-fund"];
 
 export function generateStaticParams(){
-  return ["marina-bay-residences","marina-bay-residences-regulated","seaside-private-credit-fund"].map(asset=>({asset}));
+  return [...rwaAssets,"kopi","btc-usdc"].map(asset=>({asset}));
 }
 
 export default async function DisclosuresPage({params}:{params:Promise<{asset:string}>}){
   const {asset}=await params;
+  if(!rwaAssets.includes(asset)) return <RoutePlaceholder title="Disclosures" path={`/rwa/${asset}/disclosures`}/>;
   return <DisclosuresDataRoom assetSlug={asset}/>;
 }
