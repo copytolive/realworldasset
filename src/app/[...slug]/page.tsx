@@ -4,10 +4,10 @@ export const dynamicParams = false;
 
 export function generateStaticParams() {
   const fixed = [
-    "about","account","account/activity","account/api","account/billing","api","blog","careers",
+    "about","account/activity","account/api","account/billing","api","blog","careers",
     "community","community/compose","community/thesis/alex-kopi-buy","community/thesis/kopi-bali-update",
     "community/thesis/kopi-long-term-value","community/users/alex-morgan","compliance/kyc","docs","docs/security",
-    "help","help/contact","intelligence","listing-request","merchant","notifications","portfolio","portfolio/holdings",
+    "help","help/contact","intelligence","listing-request","merchant","notifications","portfolio/holdings",
     "portfolio/orders","portfolio/transactions","portfolio/allocation","press","privacy","pro","reports","rewards",
     "risk-disclosure","settings","settings/security","status","terms","watchlist","rwa/kopi/alerts",
     "positions/POS-KOPI-001/risk",
