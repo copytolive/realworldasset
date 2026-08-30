@@ -28,6 +28,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
   const [wallet, setWallet] = React.useState("Connect Wallet");
   const [softTheme, setSoftTheme] = React.useState(false);
   const [query, setQuery] = React.useState("");
+  const [interactionStatus, setInteractionStatus] = React.useState("");
 
   function submitSearch(event: React.FormEvent) {
     event.preventDefault();
@@ -35,7 +36,15 @@ export function AppShell({ children }: { children: React.ReactNode }) {
     router.push(q ? `/search?q=${encodeURIComponent(q)}` : "/search");
   }
 
-  return <div className={`app-shell ${softTheme ? "soft-theme" : ""}`}>
+  function announceButton(event: React.MouseEvent<HTMLDivElement>) {
+    const target = event.target as HTMLElement;
+    const button = target.closest("button");
+    if (!button || button.disabled) return;
+    const label = button.getAttribute("aria-label") || button.textContent?.trim().replace(/\s+/g, " ") || "Control";
+    setInteractionStatus(`${label.slice(0, 80)} activated`);
+  }
+
+  return <div className={`app-shell ${softTheme ? "soft-theme" : ""}`} onClickCapture={announceButton}>
     <header className="app-header">
       <AppBrand/>
       <nav className="app-nav" aria-label="Authenticated primary navigation">
@@ -54,6 +63,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
       </div>
     </header>
     {children}
+    <span className="sr-only" role="status" aria-live="polite">{interactionStatus}</span>
     <footer className="app-footer"><span className="status-dot">● System Operational</span><nav><Link href="/about">About RWA.MS</Link><Link href="/docs">Docs</Link><Link href="/api">API</Link><Link href="/help">Support</Link><Link href="/terms">Terms</Link><Link href="/privacy">Privacy</Link></nav><span>© 2026 RWA.MS</span></footer>
     <ConnectWalletModal open={walletOpen} onOpenChange={setWalletOpen} wallets={["MetaMask","Rabby Wallet","WalletConnect","Coinbase Wallet","Trust Wallet","OKX Wallet"]} onConnect={name => { setWallet(name); setWalletOpen(false); }}/>
   </div>;
