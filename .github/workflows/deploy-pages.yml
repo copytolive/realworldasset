@@ -30,7 +30,7 @@ jobs:
         run: npm install --no-audit --no-fund
 
       - name: Interaction verification
-        run: npm run verify:interactions
+        run: npm run verify:interactions && npm run verify:chat04
 
       - name: Build static export
         run: npm run build
@@ -40,13 +40,16 @@ jobs:
           python3 -m pip install --disable-pip-version-check playwright==1.55.0
           python3 -m playwright install --with-deps chromium
 
-      - name: Capture CHAT 01 visual audit
+      - name: Capture existing visual audit
         run: python3 scripts/capture-visuals.py
+
+      - name: Capture CHAT 04 trading visual and button audit
+        run: python3 scripts/capture-chat04.py
 
       - name: Upload visual audit artifact
         uses: actions/upload-artifact@v4
         with:
-          name: visual-audit-chat01
+          name: visual-audit-rwa
           path: visual-audit/
           retention-days: 2
 
