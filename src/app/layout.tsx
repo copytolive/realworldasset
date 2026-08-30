@@ -3,6 +3,7 @@ import "./globals.css";
 import "./pixel-parity.css";
 import "./pixel-parity-final.css";
 import "./pixel-parity-lock.css";
+import "./pixel-parity-assets.css";
 
 export const metadata: Metadata = {
   title: "RWA.MS",
