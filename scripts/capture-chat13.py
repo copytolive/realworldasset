@@ -45,13 +45,12 @@ def audit(page,base,name):
 def verify_flow(page,base):
     goto(page,base,"/merchant/");page.get_by_role("button",name=re.compile("Orders")).first.click();page.wait_for_timeout(100)
     if not page.url.endswith('/merchant/orders/'):raise RuntimeError('Merchant -> Orders failed')
-    page.get_by_role("button",name=re.compile("Refund / Dispute")).click();page.wait_for_timeout(100)
+    page.locator("button").filter(has_text="Refund / Dispute").click();page.wait_for_timeout(100)
     if '/account/orders/RWA-ORD-20240516-9F7A2B/dispute' not in page.url:raise RuntimeError('Merchant order -> buyer dispute failed')
     goto(page,base,"/merchant/orders/");page.get_by_role("button",name=re.compile("Updates")).first.click();page.wait_for_timeout(100)
     if not page.url.endswith('/merchant/updates/new/'):raise RuntimeError('Orders -> Update Composer failed')
     page.get_by_role("button",name=re.compile("Publish Now")).click();page.wait_for_timeout(100)
-    if 'Update published' not in page.locator('[role="status"]').all_inner_texts():
-      if 'Update published' not in page.locator('body').inner_text():raise RuntimeError('Publish state failed')
+    if 'Update published' not in page.locator('body').inner_text():raise RuntimeError('Publish state failed')
     page.get_by_role("button",name=re.compile("Advertising")).first.click();page.wait_for_timeout(100)
     if not page.url.endswith('/merchant/ads/'):raise RuntimeError('Update Composer -> Advertising failed')
     page.get_by_role("button",name="Launch Campaign",exact=True).click();page.wait_for_timeout(100)
