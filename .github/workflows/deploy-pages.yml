@@ -68,6 +68,9 @@ jobs:
         run: python3 scripts/capture-chat12.py
       - name: Capture CHAT 13 merchant growth visual and button audit
         run: python3 scripts/capture-chat13.py
+      - name: Capture extra screenshot-to-code parity surfaces
+        if: github.ref == 'refs/heads/fix/screenshot-to-code-parity'
+        run: python3 scripts/capture-parity-extra.py
       - name: Upload visual audit artifact
         if: always()
         uses: actions/upload-artifact@v4
