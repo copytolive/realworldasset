@@ -30,6 +30,17 @@ export function AppShell({ children, className = "" }: { children: React.ReactNo
   const [query, setQuery] = React.useState("");
   const [interactionStatus, setInteractionStatus] = React.useState("");
 
+  const businessProfileHeader = /^\/businesses\/[^/]+\/?$/.test(pathname);
+  const stateSheetHeader = pathname.startsWith("/qa/");
+  const designSystemHeader = pathname === "/design-system";
+  const merchantCreateHeader = pathname === "/merchant/create";
+  const showSearch = businessProfileHeader || stateSheetHeader || designSystemHeader;
+  const showModeToggle = !businessProfileHeader && !stateSheetHeader && !designSystemHeader;
+  const showPostThesis = !businessProfileHeader && !stateSheetHeader && !designSystemHeader;
+  const showProfile = !stateSheetHeader && !designSystemHeader && !merchantCreateHeader;
+  const showWallet = !businessProfileHeader;
+  const primaryNav = designSystemHeader ? [] : (businessProfileHeader || stateSheetHeader ? nav.filter(([label]) => label !== "Discover") : nav);
+
   function submitSearch(event: React.FormEvent) {
     event.preventDefault();
     const q = query.trim();
@@ -44,22 +55,22 @@ export function AppShell({ children, className = "" }: { children: React.ReactNo
     setInteractionStatus(`${label.slice(0, 80)} activated`);
   }
 
-  return <div className={`app-shell ${softTheme ? "soft-theme" : ""} ${className}`.trim()} onClickCapture={announceButton}>
+  return <div className={`app-shell ${softTheme ? "soft-theme" : ""} ${businessProfileHeader ? "app-shell--business-profile" : ""} ${stateSheetHeader ? "app-shell--state-sheet" : ""} ${designSystemHeader ? "app-shell--design-system" : ""} ${merchantCreateHeader ? "app-shell--merchant-create" : ""} ${className}`.trim()} onClickCapture={announceButton}>
     <header className="app-header">
       <AppBrand/>
-      <nav className="app-nav" aria-label="Authenticated primary navigation">
-        {nav.map(([label, href]) => <Link key={href} href={href} data-active={pathname === href ? "true" : undefined}>{label}</Link>)}
-      </nav>
-      <form className="app-header-search" onSubmit={submitSearch} role="search">
-        <input aria-label="Search RWA.MS" value={query} onChange={e => setQuery(e.target.value)} placeholder="Search" />
-      </form>
+      {primaryNav.length > 0 && <nav className="app-nav" aria-label="Authenticated primary navigation">
+        {primaryNav.map(([label, href]) => <Link key={href} href={href} data-active={pathname === href ? "true" : undefined}>{label}</Link>)}
+      </nav>}
+      {showSearch && <form className="app-header-search" onSubmit={submitSearch} role="search">
+        <span aria-hidden="true">⌕</span><input aria-label="Search RWA.MS" value={query} onChange={e => setQuery(e.target.value)} placeholder={designSystemHeader ? "Search the design system..." : "Search businesses, tokens, markets..."} /><kbd>⌘ K</kbd>
+      </form>}
       <div className="app-header-actions">
-        <div className="mode-toggle" aria-label="Interface mode"><button type="button" aria-pressed={!pro} onClick={() => setPro(false)}>Simple</button><button type="button" aria-pressed={pro} onClick={() => { setPro(true); router.push("/pro"); }}>PRO</button></div>
-        <Button size="sm" onClick={() => router.push("/community/compose")}>＋ Post Thesis</Button>
-        <button className="icon-button" type="button" aria-label="Notifications" onClick={() => router.push("/notifications")}>♢<span>3</span></button>
+        {showModeToggle ? <div className="mode-toggle" aria-label="Interface mode"><button type="button" aria-pressed={!pro} onClick={() => setPro(false)}>Simple</button><button type="button" aria-pressed={pro} onClick={() => { setPro(true); router.push("/pro"); }}>PRO</button></div> : <button type="button" className="single-pro" onClick={() => router.push("/pro")}>PRO</button>}
+        {showPostThesis && <Button size="sm" onClick={() => router.push("/community/compose")}>＋ Post Thesis</Button>}
+        <button className="icon-button" type="button" aria-label="Notifications" onClick={() => router.push("/notifications")}>♢<span>{businessProfileHeader ? "12" : "3"}</span></button>
         <button className="icon-button" type="button" aria-label="Toggle theme" onClick={() => setSoftTheme(v => !v)}>{softTheme ? "☀" : "☾"}</button>
-        <button className="profile-button" type="button" onClick={() => router.push("/account")}><span className="profile-avatar">AM</span><span>Alex Morgan<small>Level 3</small></span></button>
-        <Button size="sm" onClick={() => setWalletOpen(true)}>{wallet}</Button>
+        {showProfile && <button className="profile-button" type="button" onClick={() => router.push("/account")}><span className="profile-avatar">AM</span><span>Alex Morgan<small>Level 3</small></span></button>}
+        {showWallet && <Button size="sm" onClick={() => setWalletOpen(true)}>{wallet}</Button>}
       </div>
     </header>
     {children}
