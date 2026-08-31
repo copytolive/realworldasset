@@ -1,10 +1,19 @@
-# realworldasset — compatibility redirect
+# RWA.MS
 
-This repository is no longer an independent production application.
+Source repository target: `copytolive/realworldasset`.
 
-Canonical repository: https://github.com/copytolive/rwa
-Canonical public URL: https://copytolive.github.io/rwa/
+## CHAT 00A — Foundation States Components
 
-The final legacy application snapshot is commit `638d28efa28d708c3f12086b00cccc6b524c7db5` and is pinned from `copytolive/rwa` at `apps/realworldasset`.
+This batch implements the reusable foundation extracted from the RWA.MS design-system reference sheets. The screenshots are references, **not application routes**.
 
-All GitHub Pages traffic for this repository redirects to the canonical `/rwa/` application.
+### Included
+
+- Centralized dark-theme design tokens: semantic colors, navy/slate surfaces, typography scale, 4pt spacing, radius, borders, elevation, layout width and motion.
+- UI primitives: Button, Input, Select, Checkbox, Radio, Card, Badge, Tabs, Table, Tooltip, Alert, Toast, Skeleton.
+- Reusable application states: EmptyState, LoadingState, ErrorState and PermissionState.
+- Accessible focus, disabled, validation and reduced-motion conventions.
+- No screenshot-derived page routes were created.
+
+### Next batch
+
+Merge `feat/00a-foundation` into `main` before starting CHAT 00B.
