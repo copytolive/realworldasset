@@ -98,23 +98,47 @@ def audit_route(page,name,route):
     print(f"PARITY button audit PASS: {name} — {passed} functional/current-state; {skipped} intentional skips")
     return out
 
-def audit_wallet_modal(page):
+def open_wallet_modal(page):
     route="/markets/btc-usdc/"
     page.goto(BASE+route,wait_until="domcontentloaded",timeout=30000); ready(page)
     opener=page.get_by_role("button",name="Connect Wallet")
     if opener.count()==0: raise RuntimeError("Connect Wallet opener missing")
-    opener.first.click(); page.wait_for_timeout(120)
+    opener.first.click(); page.wait_for_timeout(100)
     dialog=page.locator('[role="dialog"]')
     if dialog.count()==0: dialog=page.locator('.rwa-overlay')
-    buttons=dialog.locator("button:visible") if dialog.count() else page.locator("button:visible")
-    labels=[]
-    for i in range(buttons.count()):
-      try: labels.append((buttons.nth(i).get_attribute("aria-label") or buttons.nth(i).inner_text() or "").strip())
-      except Exception: pass
-    if not labels: raise RuntimeError("Connect Wallet modal has no interactable buttons")
+    if dialog.count()==0: raise RuntimeError("Connect Wallet modal did not open")
+    return dialog
+
+def audit_wallet_modal(page):
+    first=open_wallet_modal(page)
+    count=first.locator("button:visible").count()
+    if count==0: raise RuntimeError("Connect Wallet modal has no interactable buttons")
+    labels=[]; results=[]
     page.screenshot(path=str(OUT/"04-connect-wallet-modal.png"),full_page=False)
-    print(f"PARITY modal audit PASS: 04-connect-wallet-modal — {len(labels)} visible modal buttons present; opener verified")
-    return {"surface":"04-connect-wallet-modal","route":route,"status":"PASS","visibleModalButtons":labels}
+    for i in range(count):
+      dialog=open_wallet_modal(page)
+      buttons=dialog.locator("button:visible")
+      if i>=buttons.count():
+        results.append({"surface":"04-connect-wallet-modal","index":i,"status":"SKIP_DYNAMIC"}); continue
+      btn=buttons.nth(i); before=state(page,btn)
+      label=before["button"].get("ariaLabel") or before["button"].get("text") or f"modal-button-{i}"
+      labels.append(label)
+      if before["button"].get("disabled"):
+        results.append({"surface":"04-connect-wallet-modal","index":i,"label":label,"status":"SKIP_DISABLED"}); continue
+      err=None
+      try:
+        btn.evaluate("el=>el.click()"); page.wait_for_timeout(120)
+      except Exception as exc: err=str(exc)
+      after=state(page)
+      ok=err is None and changed(before,after)
+      results.append({"surface":"04-connect-wallet-modal","index":i,"label":label,"status":"PASS" if ok else "FAIL","error":err})
+    failed=[x for x in results if x["status"]=="FAIL"]
+    if failed:
+      sample="; ".join(f'#{x["index"]} {x.get("label")}: {x.get("error") or "no observable action"}' for x in failed[:10])
+      raise RuntimeError(f"Connect Wallet modal button audit failed ({len(failed)}): {sample}")
+    passed=sum(1 for x in results if x["status"].startswith("PASS")); skipped=len(results)-passed
+    print(f"PARITY modal button audit PASS: 04-connect-wallet-modal — {passed} functional; {skipped} intentional skips; 0 FAIL")
+    return results
 
 def main():
     if PREVIEW.exists(): shutil.rmtree(PREVIEW)
@@ -135,7 +159,8 @@ def main():
           records.append({"name":name,"route":route,"url":page.url,"status":response.status if response else None,"placeholder":placeholder,"viewport":VIEWPORT})
           print(f"PARITY capture: {name} -> {route} placeholder={placeholder}")
           audits.extend(audit_route(page,name,route))
-        records.append(audit_wallet_modal(page))
+        audits.extend(audit_wallet_modal(page))
+        records.append({"name":"04-connect-wallet-modal","route":"/markets/btc-usdc/ + Connect Wallet","status":"PASS","viewport":VIEWPORT})
         browser.close()
     finally:
       server.terminate()
@@ -144,6 +169,8 @@ def main():
     (OUT/"parity-extra-capture.json").write_text(json.dumps(records,indent=2),encoding="utf-8")
     (OUT/"parity-extra-button-audit.json").write_text(json.dumps(audits,indent=2),encoding="utf-8")
     passed=sum(1 for x in audits if x["status"].startswith("PASS")); skipped=sum(1 for x in audits if x["status"].startswith("SKIP"))
+    failed=sum(1 for x in audits if x["status"]=="FAIL")
+    if failed: raise RuntimeError(f"Supplemental button proof has {failed} failures")
     print(f"Captured {len(SURFACES)+1} supplemental source surfaces at 1672x941")
     print(f"PARITY supplemental browser button audit PASS: {passed} functional/current-state controls; {skipped} intentional skips; 0 FAIL")
 
