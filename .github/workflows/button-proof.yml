@@ -1,0 +1,42 @@
+name: Button Proof
+
+on:
+  push:
+    branches: ["fix/screenshot-to-code-parity"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  proof:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npm install --no-audit --no-fund
+      - name: Static interaction contract
+        run: npm run verify:interactions
+      - name: TypeScript
+        run: npm run typecheck
+      - name: Build
+        run: npm run build
+      - name: Browser runtime
+        run: |
+          python3 -m pip install --disable-pip-version-check playwright==1.55.0
+          python3 -m playwright install --with-deps chromium
+      - name: Supplemental browser button proof
+        run: python3 scripts/capture-parity-extra.py
+      - name: Upload button proof
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: button-proof
+          path: |
+            visual-audit/parity-extra-button-audit.json
+            visual-audit/parity-extra-capture.json
+            visual-audit/0*.png
+            visual-audit/6*.png
+          retention-days: 7
