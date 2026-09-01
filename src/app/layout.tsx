@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { ChartFullscreenBridge } from "@/components/trading/ChartFullscreenBridge";
 import "./globals.css";
 import "./pixel-parity.css";
 import "./pixel-parity-final.css";
@@ -15,10 +14,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en">
-      <body>
-        <ChartFullscreenBridge />
-        {children}
-      </body>
+      <body>{children}</body>
     </html>
   );
 }
